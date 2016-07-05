@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ShineButton">
+        <attr name="btn_color" format="color" />
+        <attr name="btn_fill_color" format="color" />
+        <attr name="btn_assist_color" format="color" />
+        <attr name="random_shine_color" format="boolean"/>
+        <attr name="shine_count" format="integer"/>
+        <attr name="shine_turn_angle" format="float"/>
+        <attr name="small_shine_offset_angle" format="float"/>
+        <attr name="raw_resource" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="PorterImageView">
+        <attr name="siSquare" format="boolean" />
+        <attr name="siShape" format="integer|reference" />
+    </declare-styleable>
+</resources>
