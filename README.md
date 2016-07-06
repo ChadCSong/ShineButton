@@ -119,7 +119,7 @@ buildscript {
     }
 }
 dependencies {
-    compile 'com.sackcentury:shinebutton:0.1.0@aar'
+    compile 'com.sackcentury:shinebutton:0.1.0'
 }
 ```
 
