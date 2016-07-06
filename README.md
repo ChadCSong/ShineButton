@@ -102,7 +102,27 @@ app:enable_flashing="true"
 
 ## Maven
 
-Will coming soon...
+```xml
+<dependency>
+  <groupId>com.sackcentury</groupId>
+  <artifactId>shinebutton</artifactId>
+  <version>0.1.0</version>
+  <type>aar</type>
+</dependency>
+```
+## Gradle
+
+```gradle
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+dependencies {
+    compile 'com.sackcentury:shinebutton:0.1.0@aar'
+}
+```
+
 
 ## Further
 
