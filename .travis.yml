@@ -2,8 +2,8 @@ language: android
 android:
   components:
   - build-tools-19.1.0               # BuildTools version
-  - android-19                       # SDK version
+  - android-21                       # SDK version
   - sys-img-armeabi-v7a-android-19   # System image
 script:
   - android list targets
-  - echo no | android create avd --force -n test -t android-19 --abi arme
+  - echo no | android create avd --force -n test -t android-19 --abi arm
