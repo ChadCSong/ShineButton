@@ -31,7 +31,7 @@ public class ShineButton extends PorterShapeImageView {
     Activity activity;
     ShineView shineView;
     ValueAnimator shakeAnimator;
-    ShineView.ShineParams shineParams = new ShineView.ShineParams();
+    ShineView.ShineParams shineParams;
 
     OnCheckedChangeListener listener;
 
@@ -56,6 +56,7 @@ public class ShineButton extends PorterShapeImageView {
         if(context instanceof Activity){
             init((Activity) context);
         }
+        shineParams = new ShineView.ShineParams();
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShineButton);
         btn_color = a.getColor(R.styleable.ShineButton_btn_color, Color.GRAY);
         btn_fill_color = a.getColor(R.styleable.ShineButton_btn_fill_color, Color.BLACK);

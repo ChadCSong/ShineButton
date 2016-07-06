@@ -231,7 +231,7 @@ public class ShineView extends View {
         public float shineTurnAngle = 20;
         public float shineDistanceMultiple = 1.5f;
         public float smallShineOffsetAngle = 20;
-        public int smallShineColor = colorRandom[6];
+        public int smallShineColor = 0;
     }
 
     private void initShineParams(ShineParams shineParams, ShineButton shineButton) {
@@ -245,6 +245,10 @@ public class ShineView extends View {
         clickAnimDuration = shineParams.clickAnimDuration;
         smallShineColor = shineParams.smallShineColor;
         bigShineColor = shineParams.bigShineColor;
+
+        if (smallShineColor == 0) {
+            smallShineColor = colorRandom[6];
+        }
 
         if (bigShineColor == 0) {
             bigShineColor = shineButton.getColor();
