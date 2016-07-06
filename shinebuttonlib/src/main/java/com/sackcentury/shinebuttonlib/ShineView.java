@@ -228,6 +228,7 @@ public class ShineView extends View {
             colorRandom[8] = Color.parseColor("#666666");
             colorRandom[9] = Color.parseColor("#999933");
         }
+
         public boolean allowRandomColor = false;
         public long animDuration = 1500;
         public int bigShineColor = 0;

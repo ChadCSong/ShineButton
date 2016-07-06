@@ -53,7 +53,7 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     private void initButton(Context context, AttributeSet attrs) {
-        if(context instanceof Activity){
+        if (context instanceof Activity) {
             init((Activity) context);
         }
         shineParams = new ShineView.ShineParams();
