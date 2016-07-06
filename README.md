@@ -35,7 +35,7 @@ If this property is true,the effects will become random color shine.
 app:allow_random_color
 ```
 
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_small_shine.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_small.gif)
 
 ```xml
  <com.sackcentury.shinebuttonlib.ShineButton
