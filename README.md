@@ -44,8 +44,10 @@ app:allow_random_color
 
 
 ```shell
-app:shine_count="8"
-app:shine_turn_angle="90"
+app:shine_turn_angle="20"
+app:shine_count="15"
+app:allow_random_color="true"
+app:enable_flashing="true"
 ```
 ![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
 
