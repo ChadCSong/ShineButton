@@ -1,7 +1,7 @@
 # ShineButton
 This is a UI lib for Android. Effects like shining.
 
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_small.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
 
 ## Usage
  shineButton = (ShineButton) findViewById(R.id.shine_button);
@@ -25,6 +25,8 @@ If this property is true,the effects will become random color shine.
 ```shell
 app:allow_random_color
 ```
+
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
 
 ```xml
  <com.sackcentury.shinebuttonlib.ShineButton
