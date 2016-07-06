@@ -39,6 +39,10 @@ app:allow_random_color
  ```
  #### Complex Usage
 
+```shell
+app:shine_count="15"
+```
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_more_shine.gif)
 
 
  ```xml
@@ -63,7 +67,6 @@ app:allow_random_color
                  app:siShape="@raw/like"/>
   ```
 
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo.gif)
 
 ## Requirements
 
@@ -71,7 +74,7 @@ app:allow_random_color
 
 ## Code Reference
 
-![android-shape-imageview](https://github.com/siyamed/android-shape-imageview)
+[android-shape-imageview](https://github.com/siyamed/android-shape-imageview)
 
 ## Marven
 
@@ -81,7 +84,7 @@ Will coming...
 
 ## Credits
 
-![fave-button](https://github.com/xhamr/fave-button) Android implement.
+[fave-button](https://github.com/xhamr/fave-button) Android implement.
 FaveButton was inspired by Twitter’s Like Heart Animation;
 
 License
