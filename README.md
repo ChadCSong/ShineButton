@@ -5,7 +5,7 @@ This is a UI lib for Android. Effects like shining.
 ## Usage
  shineButton = (ShineButton) findViewById(R.id.shine_button);
  shineButton.init(activity);
-#### Simple Usage
+### Simple Usage
 
 Icon shape is made from png mask. Please see raw files.
 ```shell
@@ -37,10 +37,11 @@ app:allow_random_color
                 app:allow_random_color="false"
                 app:siShape="@raw/smile"/>
  ```
- #### Complex Usage
+ ### Complex Usage
 
 ```shell
-app:shine_count="15"
+app:shine_count="8"
+app:shine_turn_angle="90"
 ```
 ![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_more_shine.gif)
 
@@ -84,7 +85,7 @@ Will coming...
 
 ## Credits
 
-[fave-button](https://github.com/xhamr/fave-button) Android implement.
+iOS lib [fave-button](https://github.com/xhamr/fave-button) Android implement.
 FaveButton was inspired by Twitter’s Like Heart Animation;
 
 License
