@@ -5,7 +5,7 @@ This is a UI lib for Android. Effects like shining.
 ## Usage
  shineButton = (ShineButton) findViewById(R.id.shine_button);
  shineButton.init(activity);
-### Simple Usage
+#### Simple Usage
 
 Icon shape is made from png mask. Please see raw files.
 ```shell
@@ -37,7 +37,7 @@ app:allow_random_color
                 app:allow_random_color="false"
                 app:siShape="@raw/smile"/>
  ```
- ### Complex Usage
+#### Complex Usage
 
 ```shell
 app:shine_count="8"
