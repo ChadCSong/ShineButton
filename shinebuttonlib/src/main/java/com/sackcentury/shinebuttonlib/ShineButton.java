@@ -25,7 +25,6 @@ import android.view.animation.LinearInterpolator;
 public class ShineButton extends PorterShapeImageView {
     private boolean isChecked = false;
 
-
     private int btn_color;
     private int btn_fill_color;
 
@@ -54,6 +53,9 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     private void initButton(Context context, AttributeSet attrs) {
+        if(context instanceof Activity){
+            init((Activity) context);
+        }
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShineButton);
         btn_color = a.getColor(R.styleable.ShineButton_btn_color, Color.GRAY);
         btn_fill_color = a.getColor(R.styleable.ShineButton_btn_fill_color, Color.BLACK);
@@ -82,6 +84,15 @@ public class ShineButton extends PorterShapeImageView {
 
     public boolean isChecked() {
         return isChecked;
+    }
+
+
+    public void setBtn_color(int btn_color) {
+        this.btn_color = btn_color;
+    }
+
+    public void setBtn_fill_color(int btn_fill_color) {
+        this.btn_fill_color = btn_fill_color;
     }
 
     public void setChecked(boolean checked) {
