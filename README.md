@@ -1,6 +1,6 @@
 # ShineButton
 This is a UI lib for Android. Effects like shining.    
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_small.gif)
 License
 ------------
     The MIT License (MIT)
