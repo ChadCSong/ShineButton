@@ -28,7 +28,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
-                android:src="@android:color/darker_gray"
                 android:id="@+id/po_image0"
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="@android:color/holo_blue_dark"
@@ -45,7 +44,17 @@
                 android:src="@android:color/darker_gray"
                 android:id="@+id/po_image1"
                 app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="@android:color/holo_red_dark"
+                app:btn_fill_color="#FF6666"
+                app:allow_random_color="false"
+                app:enable_flashing="false"
+                app:big_shine_color="#FF6666"
+                app:click_animation_duration="200"
+                app:shine_animation_duration="1500"
+                app:shine_turn_angle="10"
+                app:small_shine_offset_angle="20"
+                app:shine_distance_multiple="1.5f"
+                app:small_shine_color="#CC9999"
+                app:shine_count="8"
                 app:siShape="@raw/like"/>
         </RelativeLayout>
         <RelativeLayout
@@ -60,7 +69,6 @@
                 android:id="@+id/po_image2"
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="@android:color/holo_green_dark"
-
                 app:siShape="@raw/smile"/>
         </RelativeLayout>
         <RelativeLayout

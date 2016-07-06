@@ -33,47 +33,54 @@ public class ShineView extends View {
     private Paint paintSmall;
 
     int colorCount = 10;
-    int colorRandom[] = new int[colorCount];
+    static int colorRandom[] = new int[10];
 
-    int shineCount = 7;
+    //Customer property
+    int shineCount;
+    float smallOffsetAngle;
+    float turnAngle;
+    long animDuration;
+    long clickAnimDuration;
+    float shineDistanceMultiple;
+    int smallShineColor = colorRandom[0];
+    int bigShineColor = colorRandom[1];
+    boolean allowRandomColor = false;
+    boolean enableFlashing = false;
 
-    float smallOffsetAngle = 20;
-    float turnAngle = 20;
+
     RectF rectF = new RectF();
-    RectF rectFsmall = new RectF();
+    RectF rectFSmall = new RectF();
 
     Random random = new Random();
     int centerAnimX;
     int centerAnimY;
     int btnWidth;
     int btnHeight;
+
     double thirdLength;
     float value;
     float clickValue = 0;
     boolean isRun = false;
+    private float distanceOffset = 0.2f;
+
 
     public ShineView(Context context) {
         super(context);
     }
 
-    public ShineView(Context context, ShineButton shineButton) {
+    public ShineView(Context context, ShineButton shineButton, ShineParams shineParams) {
         super(context);
-        this.shineAnimator = new ShineAnimator();
+
+
+        initShineParams(shineParams, shineButton);
+
+
+        this.shineAnimator = new ShineAnimator(animDuration, shineDistanceMultiple, clickAnimDuration);
         this.shineButton = shineButton;
 
-        colorRandom[0] = Color.parseColor("#E91E63");
-        colorRandom[1] = Color.parseColor("#03A9F4");
-        colorRandom[2] = Color.parseColor("#009688");
-        colorRandom[3] = Color.parseColor("#4CAF50");
-        colorRandom[4] = Color.parseColor("#795548");
-        colorRandom[5] = Color.parseColor("#F44336");
-        colorRandom[6] = Color.parseColor("#E91E63");
-        colorRandom[7] = Color.parseColor("#03A9F4");
-        colorRandom[8] = Color.parseColor("#009688");
-        colorRandom[9] = Color.parseColor("#4CAF50");
 
         paint = new Paint();
-        paint.setColor(shineButton.getColor());
+        paint.setColor(bigShineColor);
         paint.setStrokeWidth(20);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -84,13 +91,13 @@ public class ShineView extends View {
         paint2.setStrokeCap(Paint.Cap.ROUND);
 
         paintSmall = new Paint();
-        paintSmall.setColor(Color.RED);
+        paintSmall.setColor(smallShineColor);
         paintSmall.setStrokeWidth(10);
         paintSmall.setStyle(Paint.Style.STROKE);
         paintSmall.setStrokeCap(Paint.Cap.ROUND);
 
         clickAnimator = ValueAnimator.ofFloat(0f, 1.1f);
-        clickAnimator.setDuration(200);
+        clickAnimator.setDuration(clickAnimDuration);
         clickAnimator.setInterpolator(new EasingInterpolator(Ease.QUART_OUT));
         clickAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -122,8 +129,8 @@ public class ShineView extends View {
             }
         });
 
-//        paint.set
     }
+
 
     public ShineView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -141,15 +148,17 @@ public class ShineView extends View {
         int[] location = new int[2];
         shineButton.getLocationInWindow(location);
         centerAnimX = location[0] + btnWidth / 2;
-        centerAnimY = getMeasuredHeight() - shineButton.getBootomHeight() + btnHeight / 2;
+        centerAnimY = getMeasuredHeight() - shineButton.getBottomHeight() + btnHeight / 2;
         shineAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 value = (float) valueAnimator.getAnimatedValue();
-                paint.setStrokeWidth((btnWidth / 2) * (1.5f - value));
-                paintSmall.setStrokeWidth((btnWidth / 3) * (1.5f - value));
-                rectF.set(centerAnimX - (btnWidth / 1.5f * value), centerAnimY - (btnHeight / 1.5f * value), centerAnimX + (btnWidth / 1.5f * value), centerAnimY + (btnHeight / 1.5f * value));
-                rectFsmall.set(centerAnimX - (btnWidth / 1.7f * value), centerAnimY - (btnHeight / 1.7f * value), centerAnimX + (btnWidth / 1.7f * value), centerAnimY + (btnHeight / 1.7f * value));
+                paint.setStrokeWidth((btnWidth / 2) * (shineDistanceMultiple - value));
+                paintSmall.setStrokeWidth((btnWidth / 3) * (shineDistanceMultiple - value));
+
+                rectF.set(centerAnimX - (btnWidth / (3 - shineDistanceMultiple) * value), centerAnimY - (btnHeight / (3 - shineDistanceMultiple) * value), centerAnimX + (btnWidth / (3 - shineDistanceMultiple) * value), centerAnimY + (btnHeight / (3 - shineDistanceMultiple) * value));
+                rectFSmall.set(centerAnimX - (btnWidth / ((3 - shineDistanceMultiple) + distanceOffset) * value), centerAnimY - (btnHeight / ((3 - shineDistanceMultiple) + distanceOffset) * value), centerAnimX + (btnWidth / ((3 - shineDistanceMultiple) + distanceOffset) * value), centerAnimY + (btnHeight / ((3 - shineDistanceMultiple) + distanceOffset) * value));
+
                 invalidate();
             }
         });
@@ -161,38 +170,22 @@ public class ShineView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         for (int i = 0; i < shineCount; i++) {
-//            paint.setColor(colorRandom[Math.abs(colorCount / 2 - i) >= colorCount ? colorCount - 1 : Math.abs(colorCount / 2 - i)]);
+            if (allowRandomColor) {
+                paint.setColor(colorRandom[Math.abs(colorCount / 2 - i) >= colorCount ? colorCount - 1 : Math.abs(colorCount / 2 - i)]);
+            }
             canvas.drawArc(rectF, 360f / shineCount * i + 1 + ((value - 1) * turnAngle), 0.1f, false, getConfigPaint(paint));
         }
 
         for (int i = 0; i < shineCount; i++) {
-//            paint.setColor(colorRandom[Math.abs(colorCount / 2 - i) >= colorCount ? colorCount - 1 : Math.abs(colorCount / 2 - i)]);
-            canvas.drawArc(rectFsmall, 360f / shineCount * i + 1 - smallOffsetAngle + ((value - 1) * turnAngle), 0.1f, false, getConfigPaint(paintSmall));
-        }
-//        canvas.drawPoint(centerAnimX + (btnWidth / 2 * value), centerAnimY + (btnHeight / 2 * value), paint);
-//        canvas.drawPoint(centerAnimX - (btnWidth / 2 * value), centerAnimY - (btnHeight / 2 * value), paint);
-//        canvas.drawPoint(centerAnimX + (btnWidth / 2 * value), centerAnimY - (btnHeight / 2 * value), paint);
-//        canvas.drawPoint(centerAnimX - (btnWidth / 2 * value), centerAnimY + (btnHeight / 2 * value), paint);
-//
-//        canvas.drawPoint(centerAnimX, centerAnimY + (float) (thirdLength / 2 * value), paint);
-//        canvas.drawPoint(centerAnimX, centerAnimY - (float) (thirdLength / 2 * value), paint);
-//        canvas.drawPoint(centerAnimX + (float) (thirdLength / 2 * value), centerAnimY, paint);
-//        canvas.drawPoint(centerAnimX - (float) (thirdLength / 2 * value), centerAnimY, paint);
-//
-//        //右下
-//        canvas.drawPoint(centerAnimX + (btnWidth / 2 * value), centerAnimY + (btnHeight / 2 * value)-30, paintSmall);
-//        canvas.drawPoint(centerAnimX - (btnWidth / 2 * value), centerAnimY - (btnHeight / 2 * value)+30, paintSmall);
-//        canvas.drawPoint(centerAnimX + (btnWidth / 2 * value)-30, centerAnimY - (btnHeight / 2 * value), paintSmall);
-//        canvas.drawPoint(centerAnimX - (btnWidth / 2 * value)+20, centerAnimY + (btnHeight / 2 * value), paintSmall);
-//
-//        canvas.drawPoint(centerAnimX +30, centerAnimY + (float) (thirdLength / 2 * value)-20, paintSmall);
-//        canvas.drawPoint(centerAnimX -30, centerAnimY - (float) (thirdLength / 2 * value)+20, paintSmall);
-//        canvas.drawPoint(centerAnimX + (float) (thirdLength / 2 * value)-20, centerAnimY - 30, paintSmall);
-//        canvas.drawPoint(centerAnimX - (float) (thirdLength / 2 * value)+20, centerAnimY +30, paintSmall);
+            if (allowRandomColor) {
+                paint.setColor(colorRandom[Math.abs(colorCount / 2 - i) >= colorCount ? colorCount - 1 : Math.abs(colorCount / 2 - i)]);
+            }
+            canvas.drawArc(rectFSmall, 360f / shineCount * i + 1 - smallOffsetAngle + ((value - 1) * turnAngle), 0.1f, false, getConfigPaint(paintSmall));
 
-        paint.setStrokeWidth(btnWidth * (clickValue) * 1.2f);
+        }
+        paint.setStrokeWidth(btnWidth * (clickValue) * (shineDistanceMultiple - distanceOffset));
         if (clickValue != 0) {
-            paint2.setStrokeWidth(btnWidth * (clickValue) * 1.2f - 8);
+            paint2.setStrokeWidth(btnWidth * (clickValue) * (shineDistanceMultiple - distanceOffset) - 8);
         } else {
             paint2.setStrokeWidth(0);
         }
@@ -205,12 +198,57 @@ public class ShineView extends View {
     }
 
     private Paint getConfigPaint(Paint paint) {
-//        paint.setColor(colorRandom[0]);
+        if (enableFlashing) {
+            paint.setColor(colorRandom[random.nextInt(colorCount - 1)]);
+        }
         return paint;
     }
 
     private double getThirdLength(int btnHeight, int btnWidth) {
         int all = btnHeight * btnHeight + btnWidth * btnWidth;
         return Math.sqrt(all);
+    }
+
+    public static class ShineParams {
+        ShineParams() {
+            colorRandom[0] = Color.parseColor("#FFFF99");
+            colorRandom[1] = Color.parseColor("#FFCCCC");
+            colorRandom[2] = Color.parseColor("#996699");
+            colorRandom[3] = Color.parseColor("#FF6666");
+            colorRandom[4] = Color.parseColor("#FFFF66");
+            colorRandom[5] = Color.parseColor("#F44336");
+            colorRandom[6] = Color.parseColor("#666666");
+            colorRandom[7] = Color.parseColor("#CCCC00");
+            colorRandom[8] = Color.parseColor("#666666");
+            colorRandom[9] = Color.parseColor("#999933");
+        }
+        public boolean allowRandomColor = false;
+        public long animDuration = 1500;
+        public int bigShineColor = 0;
+        public long clickAnimDuration = 200;
+        public boolean enableFlashing = false;
+        public int shineCount = 7;
+        public float shineTurnAngle = 20;
+        public float shineDistanceMultiple = 1.5f;
+        public float smallShineOffsetAngle = 20;
+        public int smallShineColor = colorRandom[6];
+    }
+
+    private void initShineParams(ShineParams shineParams, ShineButton shineButton) {
+        shineCount = shineParams.shineCount;
+        turnAngle = shineParams.shineTurnAngle;
+        smallOffsetAngle = shineParams.smallShineOffsetAngle;
+        enableFlashing = shineParams.enableFlashing;
+        allowRandomColor = shineParams.allowRandomColor;
+        shineDistanceMultiple = shineParams.shineDistanceMultiple;
+        animDuration = shineParams.animDuration;
+        clickAnimDuration = shineParams.clickAnimDuration;
+        smallShineColor = shineParams.smallShineColor;
+        bigShineColor = shineParams.bigShineColor;
+
+        if (bigShineColor == 0) {
+            bigShineColor = shineButton.getColor();
+        }
+
     }
 }

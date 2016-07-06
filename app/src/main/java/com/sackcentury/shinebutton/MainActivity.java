@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "click");
             }
         });
+        shineButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(View view, boolean checked) {
+                Log.e(TAG, "click "+checked);
+            }
+        });
         porterShapeImageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
