@@ -93,6 +93,8 @@ app:enable_flashing="true"
 ## Code Reference
 
 [android-shape-imageview](https://github.com/siyamed/android-shape-imageview)
+[EasingInterpolator](https://github.com/MasayukiSuda/EasingInterpolator)
+
 
 ## Marven
 
@@ -101,9 +103,7 @@ Will coming...
 ## Further
 
 1, SVG support;
-
 2, Font support;
-
 3, Image support...
 
 ##
