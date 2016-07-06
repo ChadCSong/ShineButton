@@ -1,5 +1,7 @@
 # ShineButton
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ChadCSong/ShineButton/blob/master/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ChadCSong/ShineButton/raw/master/LICENSE)
+[![license](https://img.shields.io/badge/platform-Android-yellow.svg)](https://www.android.com)
+
 This is a UI lib for Android. Effects like shining.
 
 ![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
