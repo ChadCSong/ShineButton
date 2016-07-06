@@ -40,11 +40,14 @@ app:allow_random_color
  ```
 #### Complex Usage
 
+
+
+
 ```shell
 app:shine_count="8"
 app:shine_turn_angle="90"
 ```
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_more_shine.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
 
 
  ```xml

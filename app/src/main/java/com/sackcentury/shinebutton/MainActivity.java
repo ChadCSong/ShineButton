@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         porterShapeImageView3 = (ShineButton) findViewById(R.id.po_image3);
         if (porterShapeImageView3 != null)
             porterShapeImageView3.init(this);
+
+
         shineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
