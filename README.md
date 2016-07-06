@@ -4,8 +4,17 @@ This is a UI lib for Android. Effects like shining.
 ![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
 
 ## Usage
+```java
  shineButton = (ShineButton) findViewById(R.id.shine_button);
  shineButton.init(activity);
+```
+or
+
+```java
+ shineButton = new ShineButton(Activity);
+ shineButton.setBtn_color(int color);
+ shineButton.setBtn_fill_color(int color);
+```
 #### Simple Usage
 
 Icon shape is made from png mask. Please see raw files.
