@@ -25,8 +25,12 @@ import java.util.Random;
  **/
 public class ShineView extends View {
     private static final String TAG = "ShineView";
+
+    private static long FRAME_REFRESH_DELAY = 25;//default 10ms ,change to 25ms for saving cpu.
+
     ShineAnimator shineAnimator;
     ValueAnimator clickAnimator;
+
     ShineButton shineButton;
     private Paint paint;
     private Paint paint2;
@@ -76,6 +80,7 @@ public class ShineView extends View {
 
 
         this.shineAnimator = new ShineAnimator(animDuration, shineDistanceMultiple, clickAnimDuration);
+        ValueAnimator.setFrameDelay(FRAME_REFRESH_DELAY);
         this.shineButton = shineButton;
 
 
@@ -97,6 +102,7 @@ public class ShineView extends View {
         paintSmall.setStrokeCap(Paint.Cap.ROUND);
 
         clickAnimator = ValueAnimator.ofFloat(0f, 1.1f);
+        ValueAnimator.setFrameDelay(FRAME_REFRESH_DELAY);
         clickAnimator.setDuration(clickAnimDuration);
         clickAnimator.setInterpolator(new EasingInterpolator(Ease.QUART_OUT));
         clickAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
