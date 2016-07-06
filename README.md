@@ -100,9 +100,9 @@ app:enable_flashing="true"
 [EasingInterpolator](https://github.com/MasayukiSuda/EasingInterpolator)
 
 
-## Marven
+## Maven
 
-Will coming...
+Will coming soon...
 
 ## Further
 
