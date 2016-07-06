@@ -6,4 +6,4 @@ android:
   - sys-img-armeabi-v7a-android-19   # System image
 script:
   - android list targets
-  - echo no | android create avd --force -n test -t android-19 --abi arm
+  - echo no | android create avd --force -n test -t android-19
