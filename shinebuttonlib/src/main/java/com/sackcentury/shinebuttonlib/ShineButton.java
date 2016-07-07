@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -23,6 +24,7 @@ import android.view.animation.LinearInterpolator;
  * @since 16/7/5 下午2:27
  **/
 public class ShineButton extends PorterShapeImageView {
+    private static final String TAG = "ShineButton";
     private boolean isChecked = false;
 
     private int btn_color;
@@ -144,13 +146,23 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void showAnim() {
-        final ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
-        if (shineView != null) {
-            rootView.removeView(shineView);
+        if (activity != null) {
+            final ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+            shineView = new ShineView(activity, this, shineParams);
+            rootView.addView(shineView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            doShareAnim();
+        } else {
+            Log.e(TAG, "Please init.");
         }
-        shineView = new ShineView(activity, this, shineParams);
-        rootView.addView(shineView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        doShareAnim();
+    }
+
+    public void removeView(View view) {
+        if (activity != null) {
+            final ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+            rootView.removeView(view);
+        } else {
+            Log.e(TAG, "Please init.");
+        }
     }
 
     private void doShareAnim() {
@@ -174,6 +186,7 @@ public class ShineButton extends PorterShapeImageView {
 
             @Override
             public void onAnimationEnd(Animator animator) {
+
             }
 
             @Override
@@ -217,4 +230,5 @@ public class ShineButton extends PorterShapeImageView {
     public interface OnCheckedChangeListener {
         void onCheckedChanged(View view, boolean checked);
     }
+
 }

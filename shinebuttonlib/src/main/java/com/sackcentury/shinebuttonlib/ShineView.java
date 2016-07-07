@@ -72,7 +72,7 @@ public class ShineView extends View {
         super(context);
     }
 
-    public ShineView(Context context, ShineButton shineButton, ShineParams shineParams) {
+    public ShineView(Context context, final ShineButton shineButton, ShineParams shineParams) {
         super(context);
 
 
@@ -122,6 +122,27 @@ public class ShineView extends View {
             public void onAnimationEnd(Animator animator) {
                 clickValue = 0;
                 invalidate();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        shineAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                shineButton.removeView(ShineView.this);
             }
 
             @Override
