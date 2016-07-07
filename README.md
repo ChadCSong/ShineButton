@@ -5,6 +5,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ShineButton-green.svg?style=true)](https://android-arsenal.com/details/1/3846)
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ChadCSong/ShineButton/raw/master/LICENSE)
+
 This is a UI lib for Android. Effects like shining.
 
 ![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
