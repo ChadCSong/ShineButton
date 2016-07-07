@@ -113,7 +113,7 @@ app:enable_flashing="true"
 <dependency>
   <groupId>com.sackcentury</groupId>
   <artifactId>shinebutton</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <type>aar</type>
 </dependency>
 ```
@@ -126,7 +126,7 @@ buildscript {
     }
 }
 dependencies {
-    compile 'com.sackcentury:shinebutton:0.1.1'
+    compile 'com.sackcentury:shinebutton:0.1.2'
 }
 ```
 
