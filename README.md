@@ -15,9 +15,16 @@ This is a UI lib for Android. Effects like shining.
 or
 
 ```java
- shineButton = new ShineButton(Activity);
- shineButton.setBtn_color(int color);
- shineButton.setBtn_fill_color(int color);
+ ShineButton shineButtonJava = new ShineButton(this);
+ shineButtonJava.setBtnColor(Color.GRAY);
+ shineButtonJava.setBtnFillColor(Color.RED);
+ shineButtonJava.setShapeResource(R.raw.heart);
+ shineButtonJava.setAllowRandomColor(true);
+ LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
+ shineButtonJava.setLayoutParams(layoutParams);
+ if (linearLayout != null) {
+     linearLayout.addView(shineButtonJava);
+ }
 ```
 #### Simple Usage
 
@@ -106,7 +113,7 @@ app:enable_flashing="true"
 <dependency>
   <groupId>com.sackcentury</groupId>
   <artifactId>shinebutton</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <type>aar</type>
 </dependency>
 ```
