@@ -38,6 +38,11 @@ public class PorterShapeImageView extends PorterImageView {
         matrix = new Matrix();
     }
 
+    void setShape(Drawable drawable) {
+        shape = drawable;
+        invalidate();
+    }
+
     @Override
     protected void paintMaskCanvas(Canvas maskCanvas, Paint maskPaint, int width, int height) {
         if(shape != null) {

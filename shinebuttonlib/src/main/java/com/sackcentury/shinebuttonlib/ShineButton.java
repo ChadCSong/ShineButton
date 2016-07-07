@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -27,13 +28,16 @@ public class ShineButton extends PorterShapeImageView {
     private static final String TAG = "ShineButton";
     private boolean isChecked = false;
 
-    private int btn_color;
-    private int btn_fill_color;
+    private int btnColor;
+    private int btnFillColor;
+
+    int DEFAULT_WIDTH = 50;
+    int DEFAULT_HEIGHT = 50;
 
     Activity activity;
     ShineView shineView;
     ValueAnimator shakeAnimator;
-    ShineView.ShineParams shineParams;
+    ShineView.ShineParams shineParams = new ShineView.ShineParams();
 
     OnCheckedChangeListener listener;
 
@@ -41,6 +45,9 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context) {
         super(context);
+        if (context instanceof Activity) {
+            init((Activity) context);
+        }
     }
 
     public ShineButton(Context context, AttributeSet attrs) {
@@ -55,13 +62,13 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     private void initButton(Context context, AttributeSet attrs) {
+
         if (context instanceof Activity) {
             init((Activity) context);
         }
-        shineParams = new ShineView.ShineParams();
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShineButton);
-        btn_color = a.getColor(R.styleable.ShineButton_btn_color, Color.GRAY);
-        btn_fill_color = a.getColor(R.styleable.ShineButton_btn_fill_color, Color.BLACK);
+        btnColor = a.getColor(R.styleable.ShineButton_btn_color, Color.GRAY);
+        btnFillColor = a.getColor(R.styleable.ShineButton_btn_fill_color, Color.BLACK);
         shineParams.allowRandomColor = a.getBoolean(R.styleable.ShineButton_allow_random_color, false);
         shineParams.animDuration = a.getInteger(R.styleable.ShineButton_shine_animation_duration, (int) shineParams.animDuration);
         shineParams.bigShineColor = a.getColor(R.styleable.ShineButton_big_shine_color, shineParams.bigShineColor);
@@ -72,9 +79,8 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.shineTurnAngle = a.getFloat(R.styleable.ShineButton_shine_turn_angle, shineParams.shineTurnAngle);
         shineParams.smallShineColor = a.getColor(R.styleable.ShineButton_small_shine_color, shineParams.smallShineColor);
         shineParams.smallShineOffsetAngle = a.getFloat(R.styleable.ShineButton_small_shine_offset_angle, shineParams.smallShineOffsetAngle);
-
         a.recycle();
-        setSrcColor(btn_color);
+        setSrcColor(btnColor);
     }
 
     public int getBottomHeight() {
@@ -82,7 +88,7 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public int getColor() {
-        return btn_fill_color;
+        return btnFillColor;
     }
 
     public boolean isChecked() {
@@ -90,21 +96,22 @@ public class ShineButton extends PorterShapeImageView {
     }
 
 
-    public void setBtn_color(int btn_color) {
-        this.btn_color = btn_color;
+    public void setBtnColor(int btnColor) {
+        this.btnColor = btnColor;
+        setSrcColor(this.btnColor);
     }
 
-    public void setBtn_fill_color(int btn_fill_color) {
-        this.btn_fill_color = btn_fill_color;
+    public void setBtnFillColor(int btnFillColor) {
+        this.btnFillColor = btnFillColor;
     }
 
     public void setChecked(boolean checked) {
         isChecked = checked;
         if (checked) {
-            setSrcColor(btn_fill_color);
+            setSrcColor(btnFillColor);
             isChecked = true;
         } else {
-            setSrcColor(btn_color);
+            setSrcColor(btnColor);
             isChecked = false;
         }
         onListenerUpdate(checked);
@@ -117,13 +124,62 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void setCancel() {
-        setSrcColor(btn_color);
+        setSrcColor(btnColor);
+        if (shakeAnimator != null) {
+            shakeAnimator.cancel();
+        }
         isChecked = false;
+    }
+
+    public void setAllowRandomColor(boolean allowRandomColor) {
+        shineParams.allowRandomColor = allowRandomColor;
+    }
+
+    public void setAnimDuration(int durationMs) {
+        shineParams.animDuration = durationMs;
+    }
+
+    public void setBigShineColor(int color) {
+        shineParams.bigShineColor = color;
+    }
+
+    public void setClickAnimDuration(int durationMs) {
+        shineParams.clickAnimDuration = durationMs;
+    }
+
+    public void enableFlashing(boolean enable) {
+        shineParams.enableFlashing = enable;
+    }
+
+    public void setShineCount(int count) {
+        shineParams.shineCount = count;
+    }
+
+    public void setShineDistanceMultiple(float multiple) {
+        shineParams.shineDistanceMultiple = multiple;
+    }
+
+    public void setShineTurnAngle(float angle) {
+        shineParams.shineTurnAngle = angle;
+    }
+
+    public void setSmallShineColor(int color) {
+        shineParams.smallShineColor = color;
+    }
+
+    public void setSmallShineOffAngle(float angle) {
+        shineParams.smallShineOffsetAngle = angle;
     }
 
     @Override
     public void setOnClickListener(OnClickListener l) {
-        super.setOnClickListener(new OnButtonClickListener(l));
+        if (l instanceof OnButtonClickListener) {
+            super.setOnClickListener(l);
+        } else {
+            if (onButtonClickListener != null) {
+                onButtonClickListener.setListener(l);
+            }
+        }
     }
 
     public void setOnCheckStateChangeListener(OnCheckedChangeListener listener) {
@@ -131,8 +187,13 @@ public class ShineButton extends PorterShapeImageView {
     }
 
 
+    OnButtonClickListener onButtonClickListener;
+
     public void init(Activity activity) {
         this.activity = activity;
+        onButtonClickListener = new OnButtonClickListener();
+        setOnClickListener(onButtonClickListener);
+
     }
 
     @Override
@@ -165,6 +226,14 @@ public class ShineButton extends PorterShapeImageView {
         }
     }
 
+    public void setShapeResource(int raw) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setShape(getResources().getDrawable(raw, null));
+        } else {
+            setShape(getResources().getDrawable(raw));
+        }
+    }
+
     private void doShareAnim() {
         shakeAnimator = ValueAnimator.ofFloat(0.4f, 1f, 0.9f, 1f);
         shakeAnimator.setInterpolator(new LinearInterpolator());
@@ -181,7 +250,7 @@ public class ShineButton extends PorterShapeImageView {
         shakeAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
-                setSrcColor(btn_fill_color);
+                setSrcColor(btnFillColor);
             }
 
             @Override
@@ -208,7 +277,14 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public class OnButtonClickListener implements OnClickListener {
+        public void setListener(OnClickListener listener) {
+            this.listener = listener;
+        }
+
         OnClickListener listener;
+
+        public OnButtonClickListener() {
+        }
 
         public OnButtonClickListener(OnClickListener l) {
             listener = l;
@@ -217,13 +293,15 @@ public class ShineButton extends PorterShapeImageView {
         @Override
         public void onClick(View view) {
             if (!isChecked) {
-                showAnim();
                 isChecked = true;
+                showAnim();
             } else {
                 setCancel();
             }
             onListenerUpdate(isChecked);
-            listener.onClick(view);
+            if (listener != null) {
+                listener.onClick(view);
+            }
         }
     }
 

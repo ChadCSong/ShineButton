@@ -141,6 +141,12 @@ public abstract class PorterImageView extends ImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (widthMeasureSpec == 0) {
+            widthMeasureSpec = 50;
+        }
+        if (heightMeasureSpec == 0) {
+            heightMeasureSpec = 50;
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
