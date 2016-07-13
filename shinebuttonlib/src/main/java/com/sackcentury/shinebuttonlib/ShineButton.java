@@ -126,6 +126,7 @@ public class ShineButton extends PorterShapeImageView {
     public void setCancel() {
         setSrcColor(btnColor);
         if (shakeAnimator != null) {
+            shakeAnimator.end();
             shakeAnimator.cancel();
         }
         isChecked = false;
@@ -260,7 +261,7 @@ public class ShineButton extends PorterShapeImageView {
 
             @Override
             public void onAnimationCancel(Animator animator) {
-
+                setSrcColor(btnColor);
             }
 
             @Override
