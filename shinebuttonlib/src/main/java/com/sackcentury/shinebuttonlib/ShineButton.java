@@ -34,6 +34,9 @@ public class ShineButton extends PorterShapeImageView {
     int DEFAULT_WIDTH = 50;
     int DEFAULT_HEIGHT = 50;
 
+    DisplayMetrics metrics = new DisplayMetrics();
+
+
     Activity activity;
     ShineView shineView;
     ValueAnimator shakeAnimator;
@@ -129,7 +132,6 @@ public class ShineButton extends PorterShapeImageView {
             shakeAnimator.end();
             shakeAnimator.cancel();
         }
-        isChecked = false;
     }
 
     public void setAllowRandomColor(boolean allowRandomColor) {
@@ -200,11 +202,13 @@ public class ShineButton extends PorterShapeImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int[] location = new int[2];
-        getLocationInWindow(location);
-        bottomHeight = metrics.heightPixels - location[1];
+
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
     }
 
     public void showAnim() {
@@ -256,7 +260,7 @@ public class ShineButton extends PorterShapeImageView {
 
             @Override
             public void onAnimationEnd(Animator animator) {
-
+                setSrcColor(isChecked ? btnFillColor : btnColor);
             }
 
             @Override
@@ -275,6 +279,12 @@ public class ShineButton extends PorterShapeImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (activity != null && metrics != null) {
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            int[] location = new int[2];
+            getLocationInWindow(location);
+            bottomHeight = metrics.heightPixels - location[1];
+        }
     }
 
     public class OnButtonClickListener implements OnClickListener {
@@ -297,6 +307,7 @@ public class ShineButton extends PorterShapeImageView {
                 isChecked = true;
                 showAnim();
             } else {
+                isChecked = false;
                 setCancel();
             }
             onListenerUpdate(isChecked);
