@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
+
+    <com.sackcentury.shinebuttonlib.ShineButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/po_image3"
+        app:btn_color="@android:color/darker_gray"
+        app:btn_fill_color="#996699"
+        app:enable_flashing="true"
+        app:siShape="@raw/star" />
+</LinearLayout>

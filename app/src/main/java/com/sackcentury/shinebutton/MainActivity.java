@@ -4,8 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.sackcentury.shinebuttonlib.ShineButton;
 
@@ -16,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ShineButton porterShapeImageView2;
     ShineButton porterShapeImageView3;
 
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         if (porterShapeImageView3 != null)
             porterShapeImageView3.init(this);
 
+        listView = (ListView) findViewById(R.id.list);
+
+        listView.setAdapter(new ListAdapter());
 
         ShineButton shineButtonJava = new ShineButton(this);
 
@@ -78,5 +86,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    class ListAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return 20;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            if (view == null) {
+                view = LayoutInflater.from(MainActivity.this).inflate(R.layout.list_item, null);
+            }
+
+            return view;
+        }
     }
 }
