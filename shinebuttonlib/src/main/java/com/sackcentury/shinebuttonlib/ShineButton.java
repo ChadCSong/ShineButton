@@ -202,7 +202,7 @@ public class ShineButton extends PorterShapeImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        calPixels();
     }
 
     @Override
@@ -279,6 +279,9 @@ public class ShineButton extends PorterShapeImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    private void calPixels() {
         if (activity != null && metrics != null) {
             activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
             int[] location = new int[2];
