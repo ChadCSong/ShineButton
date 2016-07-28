@@ -48,6 +48,9 @@ public class ShineView extends View {
     float shineDistanceMultiple;
     int smallShineColor = colorRandom[0];
     int bigShineColor = colorRandom[1];
+
+    int shineSize = 0;
+
     boolean allowRandomColor = false;
     boolean enableFlashing = false;
 
@@ -180,8 +183,14 @@ public class ShineView extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 value = (float) valueAnimator.getAnimatedValue();
-                paint.setStrokeWidth((btnWidth / 2) * (shineDistanceMultiple - value));
-                paintSmall.setStrokeWidth((btnWidth / 3) * (shineDistanceMultiple - value));
+                if (shineSize != 0 && shineSize > 0) {
+                    paint.setStrokeWidth((shineSize) * (shineDistanceMultiple - value));
+                    paintSmall.setStrokeWidth(((float) shineSize / 3 * 2) * (shineDistanceMultiple - value));
+                } else {
+                    paint.setStrokeWidth((btnWidth / 2) * (shineDistanceMultiple - value));
+                    paintSmall.setStrokeWidth((btnWidth / 3) * (shineDistanceMultiple - value));
+                }
+
 
                 rectF.set(centerAnimX - (btnWidth / (3 - shineDistanceMultiple) * value), centerAnimY - (btnHeight / (3 - shineDistanceMultiple) * value), centerAnimX + (btnWidth / (3 - shineDistanceMultiple) * value), centerAnimY + (btnHeight / (3 - shineDistanceMultiple) * value));
                 rectFSmall.set(centerAnimX - (btnWidth / ((3 - shineDistanceMultiple) + distanceOffset) * value), centerAnimY - (btnHeight / ((3 - shineDistanceMultiple) + distanceOffset) * value), centerAnimX + (btnWidth / ((3 - shineDistanceMultiple) + distanceOffset) * value), centerAnimY + (btnHeight / ((3 - shineDistanceMultiple) + distanceOffset) * value));
@@ -260,6 +269,7 @@ public class ShineView extends View {
         public float shineDistanceMultiple = 1.5f;
         public float smallShineOffsetAngle = 20;
         public int smallShineColor = 0;
+        public int shineSize = 0;
     }
 
     private void initShineParams(ShineParams shineParams, ShineButton shineButton) {
@@ -273,7 +283,7 @@ public class ShineView extends View {
         clickAnimDuration = shineParams.clickAnimDuration;
         smallShineColor = shineParams.smallShineColor;
         bigShineColor = shineParams.bigShineColor;
-
+        shineSize = shineParams.shineSize;
         if (smallShineColor == 0) {
             smallShineColor = colorRandom[6];
         }

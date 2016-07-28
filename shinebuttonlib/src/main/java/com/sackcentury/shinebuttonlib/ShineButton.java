@@ -82,6 +82,7 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.shineTurnAngle = a.getFloat(R.styleable.ShineButton_shine_turn_angle, shineParams.shineTurnAngle);
         shineParams.smallShineColor = a.getColor(R.styleable.ShineButton_small_shine_color, shineParams.smallShineColor);
         shineParams.smallShineOffsetAngle = a.getFloat(R.styleable.ShineButton_small_shine_offset_angle, shineParams.smallShineOffsetAngle);
+        shineParams.shineSize = a.getDimensionPixelSize(R.styleable.ShineButton_shine_size, shineParams.shineSize);
         a.recycle();
         setSrcColor(btnColor);
     }
@@ -174,6 +175,9 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.smallShineOffsetAngle = angle;
     }
 
+    public void setSinieSize(int size) {
+        shineParams.shineSize = size;
+    }
     @Override
     public void setOnClickListener(OnClickListener l) {
         if (l instanceof OnButtonClickListener) {
