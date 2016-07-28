@@ -66,7 +66,7 @@ app:allow_random_color
 
 
 | Property                 | Java method                          | Description                     |
-| ------------------------ |:------------------------------------:| --------------------------------------------:|
+| ------------------------ | ------------------------------------ | -------------------------------------------- |
 | siShape                  | void setShapeResource(int)           | Set raw resource (png)                       |
 | btn_color                | void setBtnColor(int)                | Set origin  color                            |
 | btn_fill_color           | void setBtnFillColor(int)            | Set fill color after click                   |
