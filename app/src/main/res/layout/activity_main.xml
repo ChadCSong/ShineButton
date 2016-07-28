@@ -18,6 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
         android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="0dp"
@@ -83,6 +84,7 @@
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="#996699"
                 app:enable_flashing="true"
+                app:shine_size="40dp"
                 app:siShape="@raw/star"/>
         </RelativeLayout>
     </LinearLayout>
