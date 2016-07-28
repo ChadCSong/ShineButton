@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         shineButtonJava.setBtnFillColor(Color.RED);
         shineButtonJava.setShapeResource(R.raw.heart);
         shineButtonJava.setAllowRandomColor(true);
-        shineButtonJava.setSinieSize(100);
+        shineButtonJava.setShineSize(100);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
         shineButtonJava.setLayoutParams(layoutParams);
         if (linearLayout != null) {

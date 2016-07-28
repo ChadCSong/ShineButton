@@ -175,7 +175,7 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.smallShineOffsetAngle = angle;
     }
 
-    public void setSinieSize(int size) {
+    public void setShineSize(int size) {
         shineParams.shineSize = size;
     }
     @Override
