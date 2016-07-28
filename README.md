@@ -65,6 +65,22 @@ app:allow_random_color
 #### Complex Usage
 
 
+| Property                 | Java method                          | Description                     |
+| ------------------------ |:------------------------------------:| --------------------------------------------:|
+| siShape                  | void setShapeResource(int)           | Set raw resource (png)                       |
+| btn_color                | void setBtnColor(int)                | Set origin  color                            |
+| btn_fill_color           | void setBtnFillColor(int)            | Set fill color after click                   |
+| allow_random_color       | void setAllowRandomColor(boolean)    | Allow shine color random                     |
+| shine_animation_duration | void setAnimDuration(int)            | Set shine anim duration                      |
+| big_shine_color          | void setBigShineColor(int)           | Set big shine color                          |
+| click_animation_duration | void setClickAnimDuration(int)       | Set click anim duration                      |
+| enable_flashing          | void enableFlashing(boolean)         | Enable effect like flash                     |
+| shine_count              | void setShineCount(int)              | Set shine count around button                |
+| shine_distance_multiple  | void setShineDistanceMultiple(float) | Set multiple of distance to button           |
+| shine_turn_angle         | void setShineTurnAngle(float)        | Set turn angle of shine                      |
+| shine_size               | void setShineSize(int)               | Set size of shine by pixel                   |
+| small_shine_color        | void setSmallShineColor(int)         | Set small shine color                        |
+| small_shine_offset_angle | void setSmallShineOffAngle(float)    | Set angle offset of small shine to big shine |
 
 
 ```shell
