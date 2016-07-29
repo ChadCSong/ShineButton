@@ -165,7 +165,7 @@ FaveButton was inspired by Twitter’s Like Heart Animation;
 
 ## Donate
 
-[![Donate](https://www.paypalobjects.com/webstatic/en_US/mktg/donations/donate_hand.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=chadsong@sina.cn&currency_code=USD&item_name=Github support of ChadCSong&undefined_quantity=1)
+[![Donate](https://www.paypalobjects.com/webstatic/en_US/mktg/donations/donate_hand.png =231x140)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=chadsong@sina.cn&currency_code=USD&item_name=Github support of ChadCSong&undefined_quantity=1)
 
 
 License
