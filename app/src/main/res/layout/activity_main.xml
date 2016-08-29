@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sackcentury.shinebutton.MainActivity">
 
@@ -102,7 +100,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/list"
+        android:visibility="gone"
         android:background="@android:color/darker_gray">
 
     </ListView>
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@android:color/white"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="375dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pavel"
+                    android:layout_margin="8dp"
+                    android:maxLines="3" />
+
+                <com.sackcentury.shinebuttonlib.ShineButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/po_image8"
+                    app:btn_color="#FF6666"
+                    app:btn_fill_color="#999933"
+                    app:siShape="@raw/heart"
+                    android:layout_gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:id="@+id/movie_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="robin"
+                    android:layout_margin="8dp"
+                    android:layout_alignParentBottom="true" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>
