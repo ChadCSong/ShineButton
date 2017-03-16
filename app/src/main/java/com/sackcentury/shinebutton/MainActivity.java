@@ -10,8 +10,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.sackcentury.shinebuttonlib.ShineButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     String TAG = "MainActivity";
@@ -21,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ShineButton porterShapeImageView3;
 
     ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         shineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         shineButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(View view, boolean checked) {
-                Log.e(TAG, "click "+checked);
+                Log.e(TAG, "click " + checked);
             }
         });
 
@@ -89,16 +93,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    List<Data> dataList = new ArrayList<>();
+
+
     class ListAdapter extends BaseAdapter {
+        public ListAdapter() {
+            for (int i = 0; i < 20; i++) {
+                dataList.add(new Data());
+            }
+        }
 
         @Override
         public int getCount() {
-            return 20;
+            return dataList.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return null;
+            return dataList.get(i);
         }
 
         @Override
@@ -107,12 +119,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup viewGroup) {
             if (view == null) {
                 view = LayoutInflater.from(MainActivity.this).inflate(R.layout.list_item, null);
             }
-
+            ShineButton button = (ShineButton) view.findViewById(R.id.po_image);
+            TextView textView = (TextView) view.findViewById(R.id.text_item_id);
+            textView.setText("ShineButton Position " + i);
+            button.setChecked(dataList.get(i).checked);
+            button.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(View view, boolean checked) {
+                    dataList.get(i).checked = checked;
+                }
+            });
             return view;
         }
+    }
+
+    class Data {
+        public int position;
+        public boolean checked;
     }
 }

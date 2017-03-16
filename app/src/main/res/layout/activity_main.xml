@@ -100,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/list"
-        android:visibility="gone"
+        android:visibility="visible"
         android:background="@android:color/darker_gray">
 
     </ListView>
@@ -114,6 +114,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="10dp"
+        android:visibility="gone"
         card_view:cardElevation="24dp">
 
         <LinearLayout

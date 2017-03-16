@@ -6,14 +6,28 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ShineButton"
+        android:id="@+id/text_item_id"
+        android:padding="10dp" />
     <com.sackcentury.shinebuttonlib.ShineButton
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/po_image3"
+        android:layout_margin="20dp"
+        android:layout_gravity="right"
+        android:id="@+id/po_image"
         app:btn_color="@android:color/darker_gray"
         app:btn_fill_color="#996699"
         app:enable_flashing="true"
         app:siShape="@raw/star" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+
+        android:background="#999">
+
+    </View>
 </LinearLayout>

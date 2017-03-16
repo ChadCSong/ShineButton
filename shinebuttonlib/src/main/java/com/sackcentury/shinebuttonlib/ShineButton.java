@@ -110,6 +110,10 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void setChecked(boolean checked, boolean anim) {
+        setChecked(checked, anim, true);
+    }
+
+    private void setChecked(boolean checked, boolean anim, boolean callBack) {
         isChecked = checked;
         if (checked) {
             setSrcColor(btnFillColor);
@@ -120,11 +124,13 @@ public class ShineButton extends PorterShapeImageView {
             isChecked = false;
             if (anim) setCancel();
         }
-        onListenerUpdate(checked);
+        if (callBack) {
+            onListenerUpdate(checked);
+        }
     }
 
     public void setChecked(boolean checked) {
-        setChecked(checked, false);
+        setChecked(checked, false, false);
     }
 
     private void onListenerUpdate(boolean checked) {
@@ -184,6 +190,7 @@ public class ShineButton extends PorterShapeImageView {
     public void setShineSize(int size) {
         shineParams.shineSize = size;
     }
+
     @Override
     public void setOnClickListener(OnClickListener l) {
         if (l instanceof OnButtonClickListener) {
