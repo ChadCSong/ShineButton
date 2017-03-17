@@ -162,12 +162,6 @@ dependencies {
 iOS lib [fave-button](https://github.com/xhamr/fave-button) Android implement.
 FaveButton was inspired by Twitter’s Like Heart Animation;
 
-
-## Donate
-
-[![Donate](http://iyssf.org/wp-content/uploads/2016/02/Paypal-Donate-Button-Image.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=chadsong@sina.cn&currency_code=USD&item_name=Github support of ChadCSong&undefined_quantity=1)
-
-
 License
 ------------
     The MIT License (MIT)
