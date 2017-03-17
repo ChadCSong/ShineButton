@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/container"
     tools:context="com.sackcentury.shinebutton.MainActivity">
 
     <TextView
@@ -28,8 +29,10 @@
                 android:layout_centerInParent="true"
                 android:id="@+id/po_image0"
                 app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="#999933"
-                app:siShape="@raw/heart"/>
+                app:btn_fill_color="#f26d7d"
+                app:siShape="@raw/heart"
+                android:elevation="10dp" />
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
@@ -101,6 +104,8 @@
         android:layout_height="match_parent"
         android:id="@+id/list"
         android:visibility="visible"
+        android:divider="#dfdfdf"
+        android:dividerHeight="0.1dp"
         android:background="@android:color/darker_gray">
 
     </ListView>

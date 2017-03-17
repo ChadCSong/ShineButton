@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#00000000">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#dfdfdf"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <com.sackcentury.shinebuttonlib.ShineButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@android:color/darker_gray"
+                    android:id="@+id/po_image1"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#F44336"
+                    app:allow_random_color="true"
+                    app:siShape="@raw/smile" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <com.sackcentury.shinebuttonlib.ShineButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@android:color/darker_gray"
+                    android:id="@+id/po_image2"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#F44336"
+                    app:allow_random_color="true"
+                    app:siShape="@raw/smile" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <com.sackcentury.shinebuttonlib.ShineButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@android:color/darker_gray"
+                    android:id="@+id/po_image3"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#F44336"
+                    app:allow_random_color="true"
+                    app:siShape="@raw/smile" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/cancel_button_wrapper">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/hide_button"
+                android:background="@color/colorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/cardview_light_background"
+                android:text="HIDE" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

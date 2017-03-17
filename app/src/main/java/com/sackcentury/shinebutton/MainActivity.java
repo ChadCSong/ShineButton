@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -140,5 +142,25 @@ public class MainActivity extends AppCompatActivity {
     class Data {
         public int position;
         public boolean checked;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.fragment_page:
+                showFragmentPage();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showFragmentPage() {
+        new FragmentDemo().showFragment(getSupportFragmentManager());
     }
 }
