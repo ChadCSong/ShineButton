@@ -12,9 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ImageView;
 
-public abstract class PorterImageView extends ImageView {
+public abstract class PorterImageView extends android.support.v7.widget.AppCompatImageView {
     private static final String TAG = PorterImageView.class.getSimpleName();
 
     private static final PorterDuffXfermode PORTER_DUFF_XFERMODE = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
