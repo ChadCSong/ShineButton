@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -177,7 +178,11 @@ public class ShineView extends View {
         thirdLength = getThirdLength(btnHeight, btnWidth);
         int[] location = new int[2];
         shineButton.getLocationInWindow(location);
-        centerAnimX = location[0] + btnWidth / 2;
+
+        Rect visibleFrame = new Rect();
+        shineButton.activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+
+        centerAnimX = location[0] + btnWidth / 2 - visibleFrame.left; // If navigation bar is not displayed on left, visibleFrame.left is 0.
         centerAnimY = getMeasuredHeight() - shineButton.getBottomHeight() + btnHeight / 2;
         shineAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
