@@ -2,6 +2,7 @@ package com.sackcentury.shinebuttonlib;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.daasuu.ei.Ease;
 import com.daasuu.ei.EasingInterpolator;
@@ -183,7 +185,15 @@ public class ShineView extends View {
         shineButton.activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
 
         centerAnimX = location[0] + btnWidth / 2 - visibleFrame.left; // If navigation bar is not displayed on left, visibleFrame.left is 0.
-        centerAnimY = getMeasuredHeight() - shineButton.getBottomHeight() + btnHeight / 2;
+        if (isTranslucentNavigation(shineButton.activity)) {
+            if (isFullScreen(shineButton.activity)) {
+                centerAnimY = visibleFrame.height() - shineButton.getBottomHeight(false) + btnHeight / 2;
+            } else {
+                centerAnimY = visibleFrame.height() - shineButton.getBottomHeight(true) + btnHeight / 2;
+            }
+        } else {
+            centerAnimY = getMeasuredHeight() - shineButton.getBottomHeight(false) + btnHeight / 2;
+        }
         shineAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -297,5 +307,33 @@ public class ShineView extends View {
             bigShineColor = shineButton.getColor();
         }
 
+    }
+
+    /**
+     * @param activity
+     * @return 判断当前手机是否是全屏
+     */
+    public static boolean isFullScreen(Activity activity) {
+        int flag = activity.getWindow().getAttributes().flags;
+        if ((flag & WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param activity
+     * @return 判断当前手机是否透明虚拟按键
+     */
+    public static boolean isTranslucentNavigation(Activity activity) {
+        int flag = activity.getWindow().getAttributes().flags;
+        if ((flag & WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+                == WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -45,6 +46,7 @@ public class ShineButton extends PorterShapeImageView {
     OnCheckedChangeListener listener;
 
     private int bottomHeight;
+    private int realBottomHeight;
 
     public ShineButton(Context context) {
         super(context);
@@ -87,7 +89,10 @@ public class ShineButton extends PorterShapeImageView {
         setSrcColor(btnColor);
     }
 
-    public int getBottomHeight() {
+    public int getBottomHeight(boolean real) {
+        if (real) {
+            return realBottomHeight;
+        }
         return bottomHeight;
     }
 
@@ -303,6 +308,9 @@ public class ShineButton extends PorterShapeImageView {
             activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
             int[] location = new int[2];
             getLocationInWindow(location);
+            Rect visibleFrame = new Rect();
+            activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+            realBottomHeight = visibleFrame.height() - location[1];
             bottomHeight = metrics.heightPixels - location[1];
         }
     }
