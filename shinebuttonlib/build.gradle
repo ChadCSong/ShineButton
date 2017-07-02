@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 9
+        versionName "0.1.9"
     }
     buildTypes {
         release {
@@ -24,3 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.daasuu:EasingInterpolator:1.0.0'
 }
+
+apply from: '../maven_push.gradle'
