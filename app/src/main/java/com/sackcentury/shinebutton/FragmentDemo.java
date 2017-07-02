@@ -44,14 +44,19 @@ public class FragmentDemo extends Fragment {
 
         ShineButton shineButton2 = (ShineButton) rootView.findViewById(R.id.po_image2);
         ShineButton shineButton3 = (ShineButton) rootView.findViewById(R.id.po_image3);
-        Button hideBtn = (Button) rootView.findViewById(R.id.hide_button);
+        final Button hideBtn = (Button) rootView.findViewById(R.id.hide_button);
         hideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hideFragment();
             }
         });
-
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideFragment();
+            }
+        });
     }
 
     public void showFragment(final FragmentManager fragmentManager) {

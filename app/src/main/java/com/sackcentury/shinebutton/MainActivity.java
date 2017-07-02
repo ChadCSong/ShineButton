@@ -1,5 +1,7 @@
 package com.sackcentury.shinebutton;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,16 +10,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.sackcentury.shinebuttonlib.ShineButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     String TAG = "MainActivity";
@@ -26,13 +22,19 @@ public class MainActivity extends AppCompatActivity {
     ShineButton porterShapeImageView2;
     ShineButton porterShapeImageView3;
 
-    ListView listView;
+    Button listDemo;
+    Button fragmentDemo;
+    Button dialogDemo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         shineButton = (ShineButton) findViewById(R.id.po_image0);
+        listDemo = (Button) findViewById(R.id.btn_list_demo);
+        fragmentDemo = (Button) findViewById(R.id.btn_fragment_demo);
+        dialogDemo = (Button) findViewById(R.id.btn_dialog_demo);
+
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.wrapper);
 
@@ -48,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         if (porterShapeImageView3 != null)
             porterShapeImageView3.init(this);
 
-        listView = (ListView) findViewById(R.id.list);
-
-        listView.setAdapter(new ListAdapter());
 
         ShineButton shineButtonJava = new ShineButton(this);
 
@@ -93,56 +92,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    List<Data> dataList = new ArrayList<>();
-
-
-    class ListAdapter extends BaseAdapter {
-        public ListAdapter() {
-            for (int i = 0; i < 20; i++) {
-                dataList.add(new Data());
+        listDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), ListDemoActivity.class));
             }
-        }
-
-        @Override
-        public int getCount() {
-            return dataList.size();
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return dataList.get(i);
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(final int i, View view, ViewGroup viewGroup) {
-            if (view == null) {
-                view = LayoutInflater.from(MainActivity.this).inflate(R.layout.list_item, null);
+        });
+        fragmentDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFragmentPage();
             }
-            ShineButton button = (ShineButton) view.findViewById(R.id.po_image);
-            TextView textView = (TextView) view.findViewById(R.id.text_item_id);
-            textView.setText("ShineButton Position " + i);
-            button.setChecked(dataList.get(i).checked);
-            button.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(View view, boolean checked) {
-                    dataList.get(i).checked = checked;
-                }
-            });
-            return view;
-        }
+        });
+        dialogDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(MainActivity.this);
+                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
+                ShineButton shineButton = (ShineButton) view.findViewById(R.id.po_image);
+                shineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e(TAG, "click");
+                    }
+                });
+                dialog.setContentView(view);
+                dialog.show();
+            }
+        });
     }
 
-    class Data {
-        public int position;
-        public boolean checked;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

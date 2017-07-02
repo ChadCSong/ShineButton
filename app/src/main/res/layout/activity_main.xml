@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     android:id="@+id/container"
     tools:context="com.sackcentury.shinebutton.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
         android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="0dp"
@@ -98,17 +93,34 @@
 
     </LinearLayout>
 
-    <ListView
-        android:layout_marginTop="80dp"
+    <Button
+        android:id="@+id/btn_list_demo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list"
-        android:visibility="visible"
-        android:divider="#dfdfdf"
-        android:dividerHeight="0.1dp"
-        android:background="@android:color/darker_gray">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="List Demo Activity" />
 
-    </ListView>
+    <Button
+        android:id="@+id/btn_fragment_demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Fragment Demo" />
+
+    <Button
+        android:id="@+id/btn_dialog_demo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Dialog Demo"
+        android:visibility="gone" />
+
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -181,4 +193,4 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</RelativeLayout>
+</LinearLayout>
