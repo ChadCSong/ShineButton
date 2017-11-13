@@ -156,13 +156,18 @@ public class MainActivity extends AppCompatActivity {
      */
     public static void setFullScreen(AppCompatActivity activity) {
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            //透明导航栏
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
 
+        /**
+         * Issue Test
+         * Issue https://github.com/ChadCSong/ShineButton/issues/29
+         **/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // in Activity's onCreate() for instance
+//            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
     }

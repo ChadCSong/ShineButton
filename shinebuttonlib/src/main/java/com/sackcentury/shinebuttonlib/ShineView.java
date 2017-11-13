@@ -182,7 +182,12 @@ public class ShineView extends View {
         shineButton.getLocationInWindow(location);
 
         Rect visibleFrame = new Rect();
-        shineButton.activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+
+        if (isWindowsNotLimit(shineButton.activity)) {
+            shineButton.activity.getWindow().getDecorView().getLocalVisibleRect(visibleFrame);
+        } else {
+            shineButton.activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+        }
 
         centerAnimX = location[0] + btnWidth / 2 - visibleFrame.left; // If navigation bar is not displayed on left, visibleFrame.left is 0.
         if (isTranslucentNavigation(shineButton.activity)) {
@@ -216,6 +221,7 @@ public class ShineView extends View {
         shineAnimator.startAnim(this, centerAnimX, centerAnimY);
         clickAnimator.start();
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -311,7 +317,7 @@ public class ShineView extends View {
 
     /**
      * @param activity
-     * @return 判断当前手机是否是全屏
+     * @return isFullScreen
      */
     public static boolean isFullScreen(Activity activity) {
         int flag = activity.getWindow().getAttributes().flags;
@@ -325,7 +331,7 @@ public class ShineView extends View {
 
     /**
      * @param activity
-     * @return 判断当前手机是否透明虚拟按键
+     * @return isTranslucentNavigation
      */
     public static boolean isTranslucentNavigation(Activity activity) {
         int flag = activity.getWindow().getAttributes().flags;
@@ -336,4 +342,15 @@ public class ShineView extends View {
             return false;
         }
     }
+
+    private boolean isWindowsNotLimit(Activity activity) {
+        int flag = activity.getWindow().getAttributes().flags;
+        if ((flag & WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+                == WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
