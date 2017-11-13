@@ -144,7 +144,7 @@ buildscript {
     }
 }
 dependencies {
-    compile 'com.sackcentury:shinebutton:0.1.9'
+    compile 'com.sackcentury:shinebutton:0.2.0'
 }
 ```
 
