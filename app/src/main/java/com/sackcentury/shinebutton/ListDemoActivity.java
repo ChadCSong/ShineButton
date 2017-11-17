@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class ListDemoActivity extends Activity {
 
         listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(new ListAdapter());
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
     }
 
     List<Data> dataList = new ArrayList<>();
