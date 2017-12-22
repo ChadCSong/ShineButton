@@ -30,4 +30,4 @@ dependencies {
     compile 'com.daasuu:EasingInterpolator:1.0.0'
 }
 
-apply from: '../maven_push.gradle'
+//apply from: '../maven_push.gradle'
