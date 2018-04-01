@@ -38,7 +38,7 @@ public class PorterShapeImageView extends PorterImageView {
         matrix = new Matrix();
     }
 
-    void setShape(Drawable drawable) {
+    public void setShape(Drawable drawable) {
         shape = drawable;
         invalidate();
     }
