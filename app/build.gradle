@@ -7,18 +7,15 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion rootProject.ext.sdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.sackcentury.shinebutton"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion rootProject.ext.sdkVersion
         versionCode 1
         versionName "1.0"
-        jackOptions {
-            enabled true
-        }
     }
     compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_1_8
@@ -33,12 +30,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-        compile 'com.sackcentury:shinebutton:0.2.0'
-    compile project(path: ':shinebuttonlib')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.sackcentury:shinebutton:0.2.0'
+    implementation project(path: ':shinebuttonlib')
     //noinspection GradleCompatible
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:cardview-v7:25.4.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:cardview-v7:$supportLibVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    testImplementation 'junit:junit:4.12'
 }
