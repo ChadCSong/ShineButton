@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,16 +16,18 @@ import android.widget.LinearLayout;
 
 import com.sackcentury.shinebuttonlib.ShineButton;
 
-public class MainActivity extends AppCompatActivity {
-    String TAG = "MainActivity";
-    ShineButton shineButton;
-    ShineButton porterShapeImageView1;
-    ShineButton porterShapeImageView2;
-    ShineButton porterShapeImageView3;
+import androidx.appcompat.app.AppCompatActivity;
 
-    Button listDemo;
-    Button fragmentDemo;
-    Button dialogDemo;
+public class MainActivity extends AppCompatActivity {
+    private static String TAG = "MainActivity";
+    private ShineButton shineButton;
+    private ShineButton porterShapeImageView1;
+    private ShineButton porterShapeImageView2;
+    private ShineButton porterShapeImageView3;
+
+    private Button listDemo;
+    private Button fragmentDemo;
+    private Button dialogDemo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +37,24 @@ public class MainActivity extends AppCompatActivity {
 //            getSupportActionBar().hide();
         }
         setFullScreen(this);
-        shineButton = (ShineButton) findViewById(R.id.po_image0);
-        listDemo = (Button) findViewById(R.id.btn_list_demo);
-        fragmentDemo = (Button) findViewById(R.id.btn_fragment_demo);
-        dialogDemo = (Button) findViewById(R.id.btn_dialog_demo);
+        shineButton = findViewById(R.id.po_image0);
+        listDemo = findViewById(R.id.btn_list_demo);
+        fragmentDemo = findViewById(R.id.btn_fragment_demo);
+        dialogDemo = findViewById(R.id.btn_dialog_demo);
 
-
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.wrapper);
+        LinearLayout linearLayout = findViewById(R.id.wrapper);
 
         if (shineButton != null)
             shineButton.init(this);
-        porterShapeImageView1 = (ShineButton) findViewById(R.id.po_image1);
+        porterShapeImageView1 = findViewById(R.id.po_image1);
         if (porterShapeImageView1 != null)
             porterShapeImageView1.init(this);
-        porterShapeImageView2 = (ShineButton) findViewById(R.id.po_image2);
+        porterShapeImageView2 = findViewById(R.id.po_image2);
         if (porterShapeImageView2 != null)
             porterShapeImageView2.init(this);
-        porterShapeImageView3 = (ShineButton) findViewById(R.id.po_image3);
+        porterShapeImageView3 = findViewById(R.id.po_image3);
         if (porterShapeImageView3 != null)
             porterShapeImageView3.init(this);
-
 
         ShineButton shineButtonJava = new ShineButton(this);
 
@@ -71,63 +70,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        shineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
-        shineButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(View view, boolean checked) {
-                Log.e(TAG, "click " + checked);
-            }
-        });
+        shineButton.setOnClickListener(view -> Log.e(TAG, "click"));
+        shineButton.setOnCheckStateChangeListener((v, checked) -> Log.e(TAG, "click " + checked));
 
-        porterShapeImageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
-        porterShapeImageView3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
+        porterShapeImageView2.setOnClickListener(view -> Log.e(TAG, "click"));
+        porterShapeImageView3.setOnClickListener(view -> Log.e(TAG, "click"));
 
-
-        listDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), ListDemoActivity.class));
-            }
-        });
-        fragmentDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFragmentPage();
-            }
-        });
-        dialogDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(MainActivity.this);
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
-                ShineButton shineButton = (ShineButton) view.findViewById(R.id.po_image);
-                shineButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.e(TAG, "click");
-                    }
-                });
-                dialog.setContentView(view);
-                dialog.show();
-            }
+        listDemo.setOnClickListener(v -> startActivity(new Intent(v.getContext(), ListDemoActivity.class)));
+        fragmentDemo.setOnClickListener(view -> showFragmentPage());
+        dialogDemo.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(MainActivity.this);
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
+            ShineButton shineButton = view.findViewById(R.id.po_image);
+            shineButton.setOnClickListener(vv -> Log.e(TAG, "click"));
+            dialog.setContentView(view);
+            dialog.show();
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,7 +128,5 @@ public class MainActivity extends AppCompatActivity {
             // in Activity's onCreate() for instance
             activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-
     }
-
 }
