@@ -1,10 +1,6 @@
 package com.sackcentury.shinebutton;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +8,11 @@ import android.view.Window;
 import android.widget.Button;
 
 import com.sackcentury.shinebuttonlib.ShineButton;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * @author Chad
@@ -22,8 +23,9 @@ import com.sackcentury.shinebuttonlib.ShineButton;
  * @since 17/3/17 上午11:23
  **/
 public class FragmentDemo extends Fragment {
-    View rootView;
-    FragmentManager fragmentManager;
+
+    private View rootView;
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
@@ -39,24 +41,14 @@ public class FragmentDemo extends Fragment {
     }
 
     private void initData() {
-        ShineButton shineButton1 = (ShineButton) rootView.findViewById(R.id.po_image1);
-        shineButton1.init((MainActivity) getActivity());
+        ShineButton shineButton1 = rootView.findViewById(R.id.po_image1);
+        shineButton1.init(getActivity());
 
-        ShineButton shineButton2 = (ShineButton) rootView.findViewById(R.id.po_image2);
-        ShineButton shineButton3 = (ShineButton) rootView.findViewById(R.id.po_image3);
-        final Button hideBtn = (Button) rootView.findViewById(R.id.hide_button);
-        hideBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideFragment();
-            }
-        });
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideFragment();
-            }
-        });
+        ShineButton shineButton2 = rootView.findViewById(R.id.po_image2);
+        ShineButton shineButton3 = rootView.findViewById(R.id.po_image3);
+        final Button hideBtn = rootView.findViewById(R.id.hide_button);
+        hideBtn.setOnClickListener(view -> hideFragment());
+        rootView.setOnClickListener(view -> hideFragment());
     }
 
     public void showFragment(final FragmentManager fragmentManager) {
