@@ -167,6 +167,9 @@ FaveButton was inspired by Twitter’s Like Heart Animation;
 ### React Native
 You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-shine-button)
 
+### NativeScript
+You may also use this library with [NativeScript](https://nativescript.org) via the plugin [here](https://github.com/hamdiwanis/nativescript-shine-button)
+
 
 License
 ------------
