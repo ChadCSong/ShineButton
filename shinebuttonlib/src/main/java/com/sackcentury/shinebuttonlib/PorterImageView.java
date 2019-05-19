@@ -10,9 +10,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 
 public abstract class PorterImageView extends AppCompatImageView {
