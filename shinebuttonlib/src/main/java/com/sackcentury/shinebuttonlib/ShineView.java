@@ -172,7 +172,7 @@ public class ShineView extends View {
                 invalidate();
             }
         });
-        shineAnimator.startAnim(this, centerAnimX, centerAnimY);
+        shineAnimator.startAnim();
         clickAnimator.start();
     }
 
