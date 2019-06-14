@@ -33,8 +33,7 @@ public class ShineAnimator extends ValueAnimator {
         setInterpolator(new EasingInterpolator(Ease.QUART_OUT));
     }
 
-    public void startAnim(final ShineView shineView, final int centerAnimX, final int centerAnimY) {
-
+    void startAnim() {
         start();
     }
 
