@@ -16,4 +16,4 @@ before_script:
 
 script:
   # 生成release apk包
-  - ./gradlew assembleReleaseo | android create avd --force -n test -t android-28
+  - ./gradlew assembleRelease
