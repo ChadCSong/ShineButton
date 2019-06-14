@@ -7,7 +7,7 @@
 
 This is a UI lib for Android. Effects like shining.
 
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/image/demo_shine_others.gif)
 
 ## Usage
 ```java
@@ -48,7 +48,7 @@ If this property is true,the effects will become random color shine.
 app:allow_random_color
 ```
 
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_small.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/image/demo_small.gif)
 
 ```xml
  <com.sackcentury.shinebuttonlib.ShineButton
@@ -89,7 +89,7 @@ app:shine_count="15"
 app:allow_random_color="true"
 app:enable_flashing="true"
 ```
-![preview](https://github.com/ChadCSong/ShineButton/blob/master/demo_shine_others.gif)
+![preview](https://github.com/ChadCSong/ShineButton/blob/master/image/demo_shine_others.gif)
 
 
  ```xml
