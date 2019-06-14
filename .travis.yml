@@ -1,9 +1,15 @@
 language: android
+jdk: oraclejdk8
+
 android:
   components:
-  - build-tools-19.1.0               # BuildTools version
-  - android-21                       # SDK version
-  - sys-img-armeabi-v7a-android-19   # System image
+  - build-tools-28.0.3    # BuildTools version
+  - android-28                       # SDK version
+  # 添加Android Support Repository组件
+  - extra-android-m2repository
+  # 添加Support Library组件
+  - extra-android-support
+  # - sys-img-armeabi-v7a-android-19   # System image
 script:
   - android list targets
-  - echo no | android create avd --force -n test -t android-19
+  - echo no | android create avd --force -n test -t android-28
