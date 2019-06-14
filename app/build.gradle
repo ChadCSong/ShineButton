@@ -8,7 +8,7 @@ buildscript {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.sackcentury.shinebutton"
@@ -16,13 +16,10 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        jackOptions {
-            enabled true
-        }
     }
     compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -34,7 +31,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-        compile 'com.sackcentury:shinebutton:0.2.0'
+//        compile 'com.sackcentury:shinebutton:0.2.0'
     compile project(path: ':shinebuttonlib')
     //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:25.4.0'

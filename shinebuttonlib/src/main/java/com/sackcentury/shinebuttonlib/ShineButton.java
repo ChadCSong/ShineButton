@@ -3,6 +3,7 @@ package com.sackcentury.shinebuttonlib;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.LinearInterpolator;
+
+import com.sackcentury.shinebuttonlib.listener.SimpleAnimatorListener;
 
 /**
  * @author Chad
@@ -47,6 +50,7 @@ public class ShineButton extends PorterShapeImageView {
 
     private int bottomHeight;
     private int realBottomHeight;
+    Dialog mFixDialog;
 
     public ShineButton(Context context) {
         super(context);
@@ -87,6 +91,10 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.shineSize = a.getDimensionPixelSize(R.styleable.ShineButton_shine_size, shineParams.shineSize);
         a.recycle();
         setSrcColor(btnColor);
+    }
+
+    public void setFixDialog(Dialog fixDialog) {
+        mFixDialog = fixDialog;
     }
 
     public int getBottomHeight(boolean real) {
@@ -235,9 +243,16 @@ public class ShineButton extends PorterShapeImageView {
 
     public void showAnim() {
         if (activity != null) {
-            final ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
             shineView = new ShineView(activity, this, shineParams);
-            rootView.addView(shineView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            ViewGroup rootView;
+            if ( mFixDialog != null && mFixDialog.getWindow() != null ) {
+                rootView = (ViewGroup) mFixDialog.getWindow().getDecorView();
+                View innerView = rootView.findViewById(android.R.id.content);
+                rootView.addView(shineView, new ViewGroup.LayoutParams(innerView.getWidth(), innerView.getHeight()));
+            } else {
+                rootView = (ViewGroup) activity.getWindow().getDecorView();
+                rootView.addView(shineView, new ViewGroup.LayoutParams(rootView.getWidth(), rootView.getHeight()));
+            }
             doShareAnim();
         } else {
             Log.e(TAG, "Please init.");
@@ -274,7 +289,7 @@ public class ShineButton extends PorterShapeImageView {
                 setScaleY((float) valueAnimator.getAnimatedValue());
             }
         });
-        shakeAnimator.addListener(new Animator.AnimatorListener() {
+        shakeAnimator.addListener(new SimpleAnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
                 setSrcColor(btnFillColor);
@@ -290,10 +305,6 @@ public class ShineButton extends PorterShapeImageView {
                 setSrcColor(btnColor);
             }
 
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
         });
         shakeAnimator.start();
     }
