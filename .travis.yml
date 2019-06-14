@@ -10,6 +10,10 @@ android:
   # 添加Support Library组件
   - extra-android-support
   # - sys-img-armeabi-v7a-android-19   # System image
+before_script:
+  - chmod +x gradlew
+
+
 script:
-  - android list targets
-  - echo no | android create avd --force -n test -t android-28
+  # 生成release apk包
+  - ./gradlew assembleReleaseo | android create avd --force -n test -t android-28
