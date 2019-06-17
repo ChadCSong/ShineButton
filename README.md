@@ -114,6 +114,15 @@ app:enable_flashing="true"
                  app:siShape="@raw/like"/>
   ```
 
+### Support Dialog
+
+When use button on a Dialog
+
+```java
+shineButton.setFixDialog(dialog);
+
+```
+Easy to support.
 
 ## Requirements
 
@@ -131,7 +140,7 @@ app:enable_flashing="true"
 <dependency>
   <groupId>com.sackcentury</groupId>
   <artifactId>shinebutton</artifactId>
-  <version>0.2.0</version>
+  <version>1.0.0</version>
   <type>aar</type>
 </dependency>
 ```
@@ -144,7 +153,7 @@ buildscript {
     }
 }
 dependencies {
-    compile 'com.sackcentury:shinebutton:0.2.0'
+    compile 'com.sackcentury:shinebutton:1.0.0'
 }
 ```
 
