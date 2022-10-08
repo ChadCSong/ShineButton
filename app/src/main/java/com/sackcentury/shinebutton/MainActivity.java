@@ -36,23 +36,23 @@ public class MainActivity extends AppCompatActivity {
 //            getSupportActionBar().hide();
         }
 //        setFullScreen(this);
-        shineButton = (ShineButton) findViewById(R.id.po_image0);
-        listDemo = (Button) findViewById(R.id.btn_list_demo);
-        fragmentDemo = (Button) findViewById(R.id.btn_fragment_demo);
-        dialogDemo = (Button) findViewById(R.id.btn_dialog_demo);
+        shineButton = findViewById(R.id.po_image0);
+        listDemo = findViewById(R.id.btn_list_demo);
+        fragmentDemo = findViewById(R.id.btn_fragment_demo);
+        dialogDemo = findViewById(R.id.btn_dialog_demo);
 
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.wrapper);
+        LinearLayout linearLayout = findViewById(R.id.wrapper);
 
         if (shineButton != null)
             shineButton.init(this);
-        porterShapeImageView1 = (ShineButton) findViewById(R.id.po_image1);
+        porterShapeImageView1 = findViewById(R.id.po_image1);
         if (porterShapeImageView1 != null)
             porterShapeImageView1.init(this);
-        porterShapeImageView2 = (ShineButton) findViewById(R.id.po_image2);
+        porterShapeImageView2 = findViewById(R.id.po_image2);
         if (porterShapeImageView2 != null)
             porterShapeImageView2.init(this);
-        porterShapeImageView3 = (ShineButton) findViewById(R.id.po_image3);
+        porterShapeImageView3 = findViewById(R.id.po_image3);
         if (porterShapeImageView3 != null)
             porterShapeImageView3.init(this);
 
@@ -71,61 +71,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        shineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
-        shineButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(View view, boolean checked) {
-                Log.e(TAG, "click " + checked);
-            }
-        });
+        shineButton.setOnClickListener(view -> Log.e(TAG, "click"));
+        shineButton.setOnCheckStateChangeListener((view, checked) -> Log.e(TAG, "click " + checked));
 
-        porterShapeImageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
-        porterShapeImageView3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
+        porterShapeImageView2.setOnClickListener(view -> Log.e(TAG, "click"));
+        porterShapeImageView3.setOnClickListener(view -> Log.e(TAG, "click"));
 
 
-        listDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), ListDemoActivity.class));
-            }
-        });
-        fragmentDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFragmentPage();
-            }
-        });
-        dialogDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(MainActivity.this);
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
-                ShineButton shineButton = (ShineButton) view.findViewById(R.id.po_image);
-                shineButton.setFixDialog(dialog);
-                shineButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.e(TAG, "click");
-                    }
-                });
-                dialog.setContentView(view);
-                dialog.show();
-            }
+        listDemo.setOnClickListener(v -> startActivity(new Intent(v.getContext(), ListDemoActivity.class)));
+        fragmentDemo.setOnClickListener(v -> showFragmentPage());
+        dialogDemo.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(MainActivity.this);
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
+            ShineButton shineButton = view.findViewById(R.id.po_image);
+            shineButton.setFixDialog(dialog);
+            shineButton.setOnClickListener(v1 -> Log.e(TAG, "click"));
+            dialog.setContentView(view);
+            dialog.show();
         });
     }
 

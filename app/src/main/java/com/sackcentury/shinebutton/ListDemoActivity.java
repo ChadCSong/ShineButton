@@ -23,8 +23,7 @@ public class ListDemoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_demo);
-
-        listView = (ListView) findViewById(R.id.list);
+        listView = findViewById(R.id.list);
         listView.setAdapter(new ListAdapter());
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
@@ -60,16 +59,11 @@ public class ListDemoActivity extends Activity {
             if (view == null) {
                 view = LayoutInflater.from(ListDemoActivity.this).inflate(R.layout.list_item, null);
             }
-            ShineButton button = (ShineButton) view.findViewById(R.id.po_image);
-            TextView textView = (TextView) view.findViewById(R.id.text_item_id);
+            ShineButton button = view.findViewById(R.id.po_image);
+            TextView textView = view.findViewById(R.id.text_item_id);
             textView.setText("ShineButton Position " + i);
             button.setChecked(dataList.get(i).checked);
-            button.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(View view, boolean checked) {
-                    dataList.get(i).checked = checked;
-                }
-            });
+            button.setOnCheckStateChangeListener((view1, checked) -> dataList.get(i).checked = checked);
             return view;
         }
     }

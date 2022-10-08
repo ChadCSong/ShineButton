@@ -39,24 +39,14 @@ public class FragmentDemo extends Fragment {
     }
 
     private void initData() {
-        ShineButton shineButton1 = (ShineButton) rootView.findViewById(R.id.po_image1);
-        shineButton1.init((MainActivity) getActivity());
+        ShineButton shineButton1 = rootView.findViewById(R.id.po_image1);
+        shineButton1.init(getActivity());
 
-        ShineButton shineButton2 = (ShineButton) rootView.findViewById(R.id.po_image2);
-        ShineButton shineButton3 = (ShineButton) rootView.findViewById(R.id.po_image3);
-        final Button hideBtn = (Button) rootView.findViewById(R.id.hide_button);
-        hideBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideFragment();
-            }
-        });
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideFragment();
-            }
-        });
+        ShineButton shineButton2 = rootView.findViewById(R.id.po_image2);
+        ShineButton shineButton3 = rootView.findViewById(R.id.po_image3);
+        final Button hideBtn = rootView.findViewById(R.id.hide_button);
+        hideBtn.setOnClickListener(view -> hideFragment());
+        rootView.setOnClickListener(v -> hideFragment());
     }
 
     public void showFragment(final FragmentManager fragmentManager) {
