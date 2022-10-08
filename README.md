@@ -157,13 +157,6 @@ dependencies {
 }
 ```
 
-
-## Further
-
-1, SVG support;    
-2, Font support;    
-3, Image support...
-
 ##
 
 ## Credits
