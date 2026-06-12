@@ -100,10 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.fragment_page:
-                showFragmentPage();
-                break;
+        if (item.getItemId() == R.id.fragment_page) {
+            showFragmentPage();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -113,26 +111,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置全屏
+     * Set full screen
      *
-     * @param activity
+     * @param activity current activity
      */
     public static void setFullScreen(AppCompatActivity activity) {
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//        }
-
-        /**
-         * Issue Test
-         * Issue https://github.com/ChadCSong/ShineButton/issues/29
-         **/
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            // in Activity's onCreate() for instance
-//            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        }
-
     }
-
 }

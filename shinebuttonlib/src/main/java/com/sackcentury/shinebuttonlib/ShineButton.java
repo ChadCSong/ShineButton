@@ -21,12 +21,10 @@ import android.view.animation.LinearInterpolator;
 import com.sackcentury.shinebuttonlib.listener.SimpleAnimatorListener;
 
 /**
+ * ShineButton is a customizable animated button with a shine effect.
+ *
  * @author Chad
- * @title com.sackcentury.shinebuttonlib
- * @description
- * @modifier
- * @date
- * @since 16/7/5 下午2:27
+ * @since 16/7/5
  **/
 public class ShineButton extends PorterShapeImageView {
     private static final String TAG = "ShineButton";
@@ -35,18 +33,17 @@ public class ShineButton extends PorterShapeImageView {
     private int btnColor;
     private int btnFillColor;
 
-    int DEFAULT_WIDTH = 50;
-    int DEFAULT_HEIGHT = 50;
+    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_HEIGHT = 50;
 
-    DisplayMetrics metrics = new DisplayMetrics();
+    private DisplayMetrics metrics = new DisplayMetrics();
 
+    private Activity activity;
+    private ShineView shineView;
+    private ValueAnimator shakeAnimator;
+    private ShineView.ShineParams shineParams = new ShineView.ShineParams();
 
-    Activity activity;
-    ShineView shineView;
-    ValueAnimator shakeAnimator;
-    ShineView.ShineParams shineParams = new ShineView.ShineParams();
-
-    OnCheckedChangeListener listener;
+    private OnCheckedChangeListener listener;
 
     private int bottomHeight;
     private int realBottomHeight;

@@ -55,13 +55,13 @@ public class ListDemoActivity extends Activity {
         }
 
         @Override
-        public View getView(final int i, View view, ViewGroup viewGroup) {
+        public View getView(final int i, View view, ViewGroup parent) {
             if (view == null) {
-                view = LayoutInflater.from(ListDemoActivity.this).inflate(R.layout.list_item, null);
+                view = LayoutInflater.from(ListDemoActivity.this).inflate(R.layout.list_item, parent, false);
             }
             ShineButton button = view.findViewById(R.id.po_image);
             TextView textView = view.findViewById(R.id.text_item_id);
-            textView.setText("ShineButton Position " + i);
+            textView.setText(getString(R.string.label_shine_button) + " Position " + i);
             button.setChecked(dataList.get(i).checked);
             button.setOnCheckStateChangeListener((view1, checked) -> dataList.get(i).checked = checked);
             return view;
