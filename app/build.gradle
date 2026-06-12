@@ -7,12 +7,13 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 28
+    namespace "com.sackcentury.shinebutton"
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "com.sackcentury.shinebutton"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
@@ -33,7 +34,7 @@ dependencies {
 //    compile 'com.sackcentury:shinebutton:1.0.0'
     implementation project(path: ':shinebuttonlib')
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'

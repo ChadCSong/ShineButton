@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    namespace "com.sackcentury.shinebuttonlib"
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 9
-        versionName "0.1.9"
+        targetSdkVersion 34
+        versionCode 10
+        versionName "0.2.0"
 
     }
     compileOptions {
@@ -25,8 +26,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.13.2'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.daasuu:EasingInterpolator:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.github.MasayukiSuda:EasingInterpolator:v1.3.2'
 }
 
 //apply from: '../gradle-mvn-push.gradle'

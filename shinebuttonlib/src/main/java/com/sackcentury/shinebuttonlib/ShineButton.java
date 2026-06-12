@@ -269,11 +269,7 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void setShapeResource(int raw) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setShape(getResources().getDrawable(raw, null));
-        } else {
-            setShape(getResources().getDrawable(raw));
-        }
+        setShape(androidx.core.content.res.ResourcesCompat.getDrawable(getResources(), raw, null));
     }
 
     private void doShareAnim() {
