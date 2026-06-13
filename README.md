@@ -113,6 +113,17 @@ shineButton.setFixDialog(dialog);
 |-------------|------------|--------|
 | ![Small](image/demo_small.gif) | ![More](image/demo_more_shine.gif) | ![Others](image/demo_shine_others.gif) |
 
+## Roadmap
+
+We are continuously working to improve ShineButton. Here is what we have planned:
+
+- [ ] **Kotlin Migration**: Fully convert the library to Kotlin for better safety and modern features.
+- [ ] **Jetpack Compose**: Provide a native Composable version of ShineButton.
+- [ ] **Vector Support**: Allow using `VectorDrawable` as shape masks.
+- [ ] **Custom Animators**: Support for custom easing and path-based animations.
+- [ ] **Material 3**: Update the demo app with Material 3 design and dynamic colors.
+- [ ] **Performance**: Further optimize canvas operations and memory allocation.
+
 ## Requirements
 
 - Android API Level 14+ (Android 4.0+)
