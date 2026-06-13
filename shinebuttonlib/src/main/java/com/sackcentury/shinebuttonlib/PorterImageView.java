@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -102,7 +103,13 @@ public abstract class PorterImageView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         if (!isInEditMode()) {
-            int saveCount = canvas.saveLayer(0.0f, 0.0f, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
+            int saveCount;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                saveCount = canvas.saveLayer(0.0f, 0.0f, getWidth(), getHeight(), null);
+            } else {
+                //noinspection deprecation
+                saveCount = canvas.saveLayer(0.0f, 0.0f, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
+            }
             try {
                 if (invalidated) {
                     Drawable drawable = getDrawable();

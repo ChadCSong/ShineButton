@@ -306,6 +306,9 @@ public class ShineButton extends PorterShapeImageView {
      * Starts the shine and shake animations.
      */
     public void showAnim() {
+        if (activity == null && getContext() instanceof Activity) {
+            activity = (Activity) getContext();
+        }
         if (activity != null) {
             shineView = new ShineView(activity, this, shineParams);
             ViewGroup rootView;
@@ -313,14 +316,18 @@ public class ShineButton extends PorterShapeImageView {
             if (mFixDialog != null && mFixDialog.getWindow() != null) {
                 rootView = (ViewGroup) mFixDialog.getWindow().getDecorView();
                 View innerView = rootView.findViewById(android.R.id.content);
-                rootView.addView(shineView, new ViewGroup.LayoutParams(innerView.getWidth(), innerView.getHeight()));
+                if (innerView != null) {
+                    rootView.addView(shineView, new ViewGroup.LayoutParams(innerView.getWidth(), innerView.getHeight()));
+                } else {
+                    rootView.addView(shineView, new ViewGroup.LayoutParams(rootView.getWidth(), rootView.getHeight()));
+                }
             } else {
                 rootView = (ViewGroup) activity.getWindow().getDecorView();
                 rootView.addView(shineView, new ViewGroup.LayoutParams(rootView.getWidth(), rootView.getHeight()));
             }
             doShareAnim();
         } else {
-            Log.e(TAG, "Please init.");
+            Log.e(TAG, "ShineButton must be initialized with an Activity context to show animation.");
         }
     }
 
