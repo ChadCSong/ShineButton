@@ -21,16 +21,28 @@ import android.view.animation.LinearInterpolator;
 import com.sackcentury.shinebuttonlib.listener.SimpleAnimatorListener;
 
 /**
- * ShineButton is a customizable animated button with a shine effect.
+ * ShineButton is a customizable animated button with a "shine" effect.
+ * It inherits from {@link PorterShapeImageView} to support custom shapes via PNG masks.
  *
  * @author Chad
  * @since 16/7/5
  **/
 public class ShineButton extends PorterShapeImageView {
     private static final String TAG = "ShineButton";
+
+    /**
+     * Whether the button is currently in the "checked" (filled) state.
+     */
     private boolean isChecked = false;
 
+    /**
+     * The color of the button in its normal (unchecked) state.
+     */
     private int btnColor;
+
+    /**
+     * The color of the button when it is checked.
+     */
     private int btnFillColor;
 
     private static final int DEFAULT_WIDTH = 50;
@@ -38,15 +50,37 @@ public class ShineButton extends PorterShapeImageView {
 
     private DisplayMetrics metrics = new DisplayMetrics();
 
+    /**
+     * The host activity, used to add the {@link ShineView} to the root layout.
+     */
     private Activity activity;
+
+    /**
+     * The view responsible for rendering the shine particles.
+     */
     private ShineView shineView;
+
+    /**
+     * Animator for the button's scale/shake effect when clicked.
+     */
     private ValueAnimator shakeAnimator;
+
+    /**
+     * Parameters controlling the shine animation's appearance.
+     */
     private ShineView.ShineParams shineParams = new ShineView.ShineParams();
 
+    /**
+     * Listener for state changes.
+     */
     private OnCheckedChangeListener listener;
 
     private int bottomHeight;
     private int realBottomHeight;
+
+    /**
+     * Reference to a parent dialog, if any, to fix positioning issues.
+     */
     Dialog mFixDialog;
 
     public ShineButton(Context context) {
@@ -61,20 +95,23 @@ public class ShineButton extends PorterShapeImageView {
         initButton(context, attrs);
     }
 
-
     public ShineButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initButton(context, attrs);
     }
 
+    /**
+     * Initializes the button attributes from XML.
+     */
     private void initButton(Context context, AttributeSet attrs) {
-
         if (context instanceof Activity) {
             init((Activity) context);
         }
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShineButton);
         btnColor = a.getColor(R.styleable.ShineButton_btn_color, Color.GRAY);
         btnFillColor = a.getColor(R.styleable.ShineButton_btn_fill_color, Color.BLACK);
+
+        // Map XML attributes to ShineParams
         shineParams.allowRandomColor = a.getBoolean(R.styleable.ShineButton_allow_random_color, false);
         shineParams.animDuration = a.getInteger(R.styleable.ShineButton_shine_animation_duration, (int) shineParams.animDuration);
         shineParams.bigShineColor = a.getColor(R.styleable.ShineButton_big_shine_color, shineParams.bigShineColor);
@@ -87,51 +124,73 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.smallShineOffsetAngle = a.getFloat(R.styleable.ShineButton_small_shine_offset_angle, shineParams.smallShineOffsetAngle);
         shineParams.shineSize = a.getDimensionPixelSize(R.styleable.ShineButton_shine_size, shineParams.shineSize);
         a.recycle();
+
         setSrcColor(btnColor);
     }
 
+    /**
+     * Sets a reference to the host dialog to ensure the shine animation is placed correctly.
+     *
+     * @param fixDialog The parent dialog.
+     */
     public void setFixDialog(Dialog fixDialog) {
         mFixDialog = fixDialog;
     }
 
     public int getBottomHeight(boolean real) {
-        if (real) {
-            return realBottomHeight;
-        }
-        return bottomHeight;
+        return real ? realBottomHeight : bottomHeight;
     }
 
+    /**
+     * Returns the fill color used in the checked state.
+     */
     public int getColor() {
         return btnFillColor;
     }
 
+    /**
+     * Whether the button is currently checked.
+     */
     public boolean isChecked() {
         return isChecked;
     }
 
-
+    /**
+     * Sets the base color of the button.
+     */
     public void setBtnColor(int btnColor) {
         this.btnColor = btnColor;
         setSrcColor(this.btnColor);
     }
 
+    /**
+     * Sets the fill color used when the button is checked.
+     */
     public void setBtnFillColor(int btnFillColor) {
         this.btnFillColor = btnFillColor;
     }
 
+    /**
+     * Updates the checked state with an optional animation.
+     */
     public void setChecked(boolean checked, boolean anim) {
         setChecked(checked, anim, true);
     }
 
+    /**
+     * Internal setChecked implementation.
+     *
+     * @param checked  The new state.
+     * @param anim     Whether to show the shine/shake animation.
+     * @param callBack Whether to notify the listener.
+     */
     private void setChecked(boolean checked, boolean anim, boolean callBack) {
         isChecked = checked;
         if (checked) {
             setSrcColor(btnFillColor);
-            isChecked = true;
             if (anim) showAnim();
         } else {
             setSrcColor(btnColor);
-            isChecked = false;
             if (anim) setCancel();
         }
         if (callBack) {
@@ -139,6 +198,9 @@ public class ShineButton extends PorterShapeImageView {
         }
     }
 
+    /**
+     * Sets the checked state without animation or callback.
+     */
     public void setChecked(boolean checked) {
         setChecked(checked, false, false);
     }
@@ -149,6 +211,9 @@ public class ShineButton extends PorterShapeImageView {
         }
     }
 
+    /**
+     * Cancels the animation and reverts to the unchecked state.
+     */
     public void setCancel() {
         setSrcColor(btnColor);
         if (shakeAnimator != null) {
@@ -156,6 +221,8 @@ public class ShineButton extends PorterShapeImageView {
             shakeAnimator.cancel();
         }
     }
+
+    // --- Configuration setters for ShineParams ---
 
     public void setAllowRandomColor(boolean allowRandomColor) {
         shineParams.allowRandomColor = allowRandomColor;
@@ -216,14 +283,17 @@ public class ShineButton extends PorterShapeImageView {
         this.listener = listener;
     }
 
-
     OnButtonClickListener onButtonClickListener;
 
+    /**
+     * Initializes the button. Must be called after the button is created programmatically or from XML.
+     *
+     * @param activity The host activity.
+     */
     public void init(Activity activity) {
         this.activity = activity;
         onButtonClickListener = new OnButtonClickListener();
         setOnClickListener(onButtonClickListener);
-
     }
 
     @Override
@@ -232,17 +302,15 @@ public class ShineButton extends PorterShapeImageView {
         calPixels();
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-
-    }
-
+    /**
+     * Starts the shine and shake animations.
+     */
     public void showAnim() {
         if (activity != null) {
             shineView = new ShineView(activity, this, shineParams);
             ViewGroup rootView;
-            if ( mFixDialog != null && mFixDialog.getWindow() != null ) {
+            // Determine where to add the ShineView (Dialog root or Activity root)
+            if (mFixDialog != null && mFixDialog.getWindow() != null) {
                 rootView = (ViewGroup) mFixDialog.getWindow().getDecorView();
                 View innerView = rootView.findViewById(android.R.id.content);
                 rootView.addView(shineView, new ViewGroup.LayoutParams(innerView.getWidth(), innerView.getHeight()));
@@ -256,6 +324,9 @@ public class ShineButton extends PorterShapeImageView {
         }
     }
 
+    /**
+     * Removes a view (typically ShineView) from the activity's content view.
+     */
     public void removeView(View view) {
         if (activity != null) {
             final ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
@@ -265,22 +336,25 @@ public class ShineButton extends PorterShapeImageView {
         }
     }
 
+    /**
+     * Sets the shape of the button using a raw resource ID (PNG mask).
+     */
     public void setShapeResource(int raw) {
         setShape(androidx.core.content.res.ResourcesCompat.getDrawable(getResources(), raw, null));
     }
 
+    /**
+     * Executes the button's scale/shake animation.
+     */
     private void doShareAnim() {
         shakeAnimator = ValueAnimator.ofFloat(0.4f, 1f, 0.9f, 1f);
         shakeAnimator.setInterpolator(new LinearInterpolator());
         shakeAnimator.setDuration(500);
         shakeAnimator.setStartDelay(180);
         invalidate();
-        shakeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                setScaleX((float) valueAnimator.getAnimatedValue());
-                setScaleY((float) valueAnimator.getAnimatedValue());
-            }
+        shakeAnimator.addUpdateListener(valueAnimator -> {
+            setScaleX((float) valueAnimator.getAnimatedValue());
+            setScaleY((float) valueAnimator.getAnimatedValue());
         });
         shakeAnimator.addListener(new SimpleAnimatorListener() {
             @Override
@@ -302,11 +376,9 @@ public class ShineButton extends PorterShapeImageView {
         shakeAnimator.start();
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
+    /**
+     * Calculates position and visibility metrics to assist with positioning the shine animation.
+     */
     private void calPixels() {
         if (activity != null && metrics != null) {
             activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -319,19 +391,17 @@ public class ShineButton extends PorterShapeImageView {
         }
     }
 
+    /**
+     * Internal click listener to handle the toggle logic and animations.
+     */
     public class OnButtonClickListener implements OnClickListener {
+        private OnClickListener listener;
+
         public void setListener(OnClickListener listener) {
             this.listener = listener;
         }
 
-        OnClickListener listener;
-
-        public OnButtonClickListener() {
-        }
-
-        public OnButtonClickListener(OnClickListener l) {
-            listener = l;
-        }
+        public OnButtonClickListener() {}
 
         @Override
         public void onClick(View view) {
@@ -352,5 +422,4 @@ public class ShineButton extends PorterShapeImageView {
     public interface OnCheckedChangeListener {
         void onCheckedChanged(View view, boolean checked);
     }
-
 }
