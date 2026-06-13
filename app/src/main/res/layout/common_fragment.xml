@@ -82,14 +82,14 @@
             android:id="@+id/cancel_button_wrapper">
 
             <Button
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/hide_button"
                 android:background="@color/colorPrimary"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/cardview_light_background"
-                android:text="HIDE" />
+                android:text="@string/label_hide" />
         </LinearLayout>
     </LinearLayout>
 

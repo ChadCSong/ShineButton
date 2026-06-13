@@ -11,13 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="ShineButton" />
+        android:text="@string/label_shine_button" />
 
     <com.sackcentury.shinebuttonlib.ShineButton
         android:id="@+id/po_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="right"
+        android:layout_gravity="right|end"
         android:layout_margin="20dp"
         app:btn_color="@android:color/darker_gray"
         app:btn_fill_color="#996699"
