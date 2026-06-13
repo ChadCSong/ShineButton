@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] - 2026-06-13
+## [0.2.1] - 2026-06-13
 
 ### Added
 - GitHub Actions CI workflow for automated builds.
@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
 - Deprecated `getDrawable()` calls replaced with `ResourcesCompat`.
 - Non-final resource ID issues in switch-case statements.
 
-## [1.0.0] - 2016-07-10
+## [0.2.0] - 2016-07-10
 ... (rest of the file)
 
 ### Added

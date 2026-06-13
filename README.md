@@ -26,7 +26,7 @@ Add the dependency to your `app/build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation 'com.sackcentury:shinebutton:0.2.0'
+    implementation 'com.sackcentury:shinebutton:0.2.1'
 }
 ```
 
@@ -36,7 +36,7 @@ dependencies {
 <dependency>
   <groupId>com.sackcentury</groupId>
   <artifactId>shinebutton</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
   <type>aar</type>
 </dependency>
 ```
