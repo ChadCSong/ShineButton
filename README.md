@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Android-yellow.svg)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
+[![JitPack](https://jitpack.io/v/ChadCSong/ShineButton.svg)](https://jitpack.io/#ChadCSong/ShineButton)
 [![Maven Central](https://img.shields.io/maven-central/v/com.sackcentury/shinebutton.svg)](https://search.maven.org/artifact/com.sackcentury/shinebutton)
 
 A lightweight, customizable Android UI library that adds a "shining" effect to buttons, similar to Twitter's heart animation.
@@ -20,7 +21,28 @@ A lightweight, customizable Android UI library that adds a "shining" effect to b
 
 ## Installation
 
-### Gradle
+### JitPack (Recommended for latest version)
+
+1. Add the JitPack repository to your root `build.gradle` file:
+
+```gradle
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+2. Add the dependency to your `app/build.gradle` file:
+
+```gradle
+dependencies {
+    implementation 'com.github.ChadCSong:ShineButton:v0.3.0'
+}
+```
+
+### Gradle (Maven Central)
 
 Add the dependency to your `app/build.gradle` file:
 
