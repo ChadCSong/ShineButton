@@ -26,7 +26,7 @@ Add the dependency to your `app/build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation 'com.sackcentury:shinebutton:0.2.1'
+    implementation 'com.sackcentury:shinebutton:0.3.0'
 }
 ```
 
@@ -36,7 +36,7 @@ dependencies {
 <dependency>
   <groupId>com.sackcentury</groupId>
   <artifactId>shinebutton</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
   <type>aar</type>
 </dependency>
 ```
@@ -117,7 +117,7 @@ shineButton.setFixDialog(dialog);
 
 We are continuously working to improve ShineButton. Here is what we have planned:
 
-- [ ] **Kotlin Migration**: Fully convert the library to Kotlin for better safety and modern features.
+- [x] **Kotlin Migration**: Fully convert the library to Kotlin for better safety and modern features.
 - [ ] **Jetpack Compose**: Provide a native Composable version of ShineButton.
 - [ ] **Vector Support**: Allow using `VectorDrawable` as shape masks.
 - [ ] **Custom Animators**: Support for custom easing and path-based animations.

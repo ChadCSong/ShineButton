@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     namespace "com.sackcentury.shinebuttonlib"
@@ -7,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 34
-        versionCode 11
-        versionName "0.2.1"
+        versionCode 12
+        versionName "0.3.0"
 
     }
     compileOptions {
@@ -25,6 +26,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.20"
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.github.MasayukiSuda:EasingInterpolator:v1.3.2'

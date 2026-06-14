@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2026-06-13
+
+### Added
+- **Kotlin Migration**: Fully converted the library module (`shinebuttonlib`) to Kotlin.
+- Improved null safety and idiomatic Kotlin code.
+
+### Changed
+- Updated library version to 0.3.0.
+
 ## [0.2.1] - 2026-06-13
 
 ### Added
