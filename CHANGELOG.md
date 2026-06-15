@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-06-13
+
+### Added
+- **Jetpack Compose Support**: Introduced `ShineButtonCompose`, a native Composable implementation of the ShineButton.
+- Added Compose animation (`Transition`, `Animatable`) and rendering logic.
+- Supported custom shapes using `ImageVector` in Compose.
+
+### Changed
+- Increased `minSdkVersion` to 21 to support Jetpack Compose.
+- Updated library version to 0.4.0.
+
 ## [0.3.0] - 2026-06-13
 
 ### Added

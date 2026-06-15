@@ -38,7 +38,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.ChadCSong:ShineButton:v0.3.0'
+    implementation 'com.github.ChadCSong:ShineButton:v0.4.0'
 }
 ```
 
@@ -87,6 +87,25 @@ The simplest way to use `ShineButton` is in your XML layout:
 ```java
 ShineButton shineButton = (ShineButton) findViewById(R.id.shine_button);
 shineButton.init(activity);
+```
+
+### Jetpack Compose Implementation
+
+ShineButton now supports Jetpack Compose natively!
+
+```kotlin
+var isChecked by remember { mutableStateOf(false) }
+
+ShineButtonCompose(
+    isChecked = isChecked,
+    onCheckedChange = { isChecked = it },
+    shape = Icons.Default.Favorite, // Use any ImageVector
+    btnColor = Color.LightGray,
+    btnFillColor = Color.Red,
+    shineColor = Color.Red,
+    shineSize = 50.dp,
+    allowRandomColor = true
+)
 ```
 
 Or create it dynamically:
@@ -140,7 +159,7 @@ shineButton.setFixDialog(dialog);
 We are continuously working to improve ShineButton. Here is what we have planned:
 
 - [x] **Kotlin Migration**: Fully convert the library to Kotlin for better safety and modern features.
-- [ ] **Jetpack Compose**: Provide a native Composable version of ShineButton.
+- [x] **Jetpack Compose**: Provide a native Composable version of ShineButton.
 - [ ] **Vector Support**: Allow using `VectorDrawable` as shape masks.
 - [ ] **Custom Animators**: Support for custom easing and path-based animations.
 - [ ] **Material 3**: Update the demo app with Material 3 design and dynamic colors.
