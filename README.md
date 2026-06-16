@@ -175,6 +175,16 @@ We are continuously working to improve ShineButton. Here is what we have planned
 - Uses [EasingInterpolator](https://github.com/MasayukiSuda/EasingInterpolator) for smooth animations.
 - Concepts from [android-shape-imageview](https://github.com/siyamed/android-shape-imageview).
 
+## Third Party Bindings
+  		  
+### React Native
+You may now use this library with [React Native](https://github.com/facebook/react-native) via the module [here](https://github.com/prscX/react-native-shine-button)
+
+### NativeScript
+You may also use this library with [NativeScript](https://nativescript.org) via the plugin [here](https://github.com/hamdiwanis/nativescript-shine-button)
+
+
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
+
