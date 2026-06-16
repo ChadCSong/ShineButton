@@ -2,8 +2,7 @@ package com.sackcentury.shinebuttonlib
 
 import android.animation.ValueAnimator
 import android.graphics.Canvas
-import com.daasuu.ei.Ease
-import com.daasuu.ei.EasingInterpolator
+import com.sackcentury.shinebuttonlib.interpolator.QuartOutInterpolator
 
 /**
  * ShineAnimator handles the value animation for the shine effect particles.
@@ -21,7 +20,7 @@ class ShineAnimator : ValueAnimator {
         setFloatValues(1f, maxValue)
         duration = animDuration
         startDelay = 200
-        interpolator = EasingInterpolator(Ease.QUART_OUT)
+        interpolator = QuartOutInterpolator()
     }
 
     constructor(durationMs: Long, maxValue: Float, delay: Long) {
@@ -30,7 +29,7 @@ class ShineAnimator : ValueAnimator {
         setFloatValues(1f, maxValue)
         duration = durationMs
         startDelay = delay
-        interpolator = EasingInterpolator(Ease.QUART_OUT)
+        interpolator = QuartOutInterpolator()
     }
 
     fun startAnim() {

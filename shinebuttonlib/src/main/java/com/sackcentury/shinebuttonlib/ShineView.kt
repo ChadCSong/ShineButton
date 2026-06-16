@@ -10,8 +10,7 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
-import com.daasuu.ei.Ease
-import com.daasuu.ei.EasingInterpolator
+import com.sackcentury.shinebuttonlib.interpolator.QuartOutInterpolator
 import com.sackcentury.shinebuttonlib.listener.SimpleAnimatorListener
 import java.util.*
 
@@ -124,7 +123,7 @@ class ShineView : View {
         // Click splash animation (expanding circle)
         clickAnimator = ValueAnimator.ofFloat(0f, 1.1f).apply {
             duration = clickAnimDuration
-            interpolator = EasingInterpolator(Ease.QUART_OUT)
+            interpolator = QuartOutInterpolator()
             addUpdateListener { valueAnimator ->
                 clickValue = valueAnimator.animatedValue as Float
                 invalidate()
