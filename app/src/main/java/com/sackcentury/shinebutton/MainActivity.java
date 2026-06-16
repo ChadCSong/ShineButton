@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,24 +35,24 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
 //            getSupportActionBar().hide();
         }
-        setFullScreen(this);
-        shineButton = (ShineButton) findViewById(R.id.po_image0);
-        listDemo = (Button) findViewById(R.id.btn_list_demo);
-        fragmentDemo = (Button) findViewById(R.id.btn_fragment_demo);
-        dialogDemo = (Button) findViewById(R.id.btn_dialog_demo);
+//        setFullScreen(this);
+        shineButton = findViewById(R.id.po_image0);
+        listDemo = findViewById(R.id.btn_list_demo);
+        fragmentDemo = findViewById(R.id.btn_fragment_demo);
+        dialogDemo = findViewById(R.id.btn_dialog_demo);
 
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.wrapper);
+        LinearLayout linearLayout = findViewById(R.id.wrapper);
 
         if (shineButton != null)
             shineButton.init(this);
-        porterShapeImageView1 = (ShineButton) findViewById(R.id.po_image1);
+        porterShapeImageView1 = findViewById(R.id.po_image1);
         if (porterShapeImageView1 != null)
             porterShapeImageView1.init(this);
-        porterShapeImageView2 = (ShineButton) findViewById(R.id.po_image2);
+        porterShapeImageView2 = findViewById(R.id.po_image2);
         if (porterShapeImageView2 != null)
             porterShapeImageView2.init(this);
-        porterShapeImageView3 = (ShineButton) findViewById(R.id.po_image3);
+        porterShapeImageView3 = findViewById(R.id.po_image3);
         if (porterShapeImageView3 != null)
             porterShapeImageView3.init(this);
 
@@ -71,60 +71,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        shineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
-        shineButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(View view, boolean checked) {
-                Log.e(TAG, "click " + checked);
-            }
-        });
+        shineButton.setOnClickListener(view -> Log.e(TAG, "click"));
+        shineButton.setOnCheckStateChangeListener((view, checked) -> Log.e(TAG, "click " + checked));
 
-        porterShapeImageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
-        porterShapeImageView3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "click");
-            }
-        });
+        porterShapeImageView2.setOnClickListener(view -> Log.e(TAG, "click"));
+        porterShapeImageView3.setOnClickListener(view -> Log.e(TAG, "click"));
 
 
-        listDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), ListDemoActivity.class));
-            }
-        });
-        fragmentDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFragmentPage();
-            }
-        });
-        dialogDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(MainActivity.this);
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
-                ShineButton shineButton = (ShineButton) view.findViewById(R.id.po_image);
-                shineButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.e(TAG, "click");
-                    }
-                });
-                dialog.setContentView(view);
-                dialog.show();
-            }
+        listDemo.setOnClickListener(v -> startActivity(new Intent(v.getContext(), ListDemoActivity.class)));
+        fragmentDemo.setOnClickListener(v -> showFragmentPage());
+        dialogDemo.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(MainActivity.this);
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog, null);
+            ShineButton shineButton = view.findViewById(R.id.po_image);
+            shineButton.setFixDialog(dialog);
+            shineButton.setOnClickListener(v1 -> Log.e(TAG, "click"));
+            dialog.setContentView(view);
+            dialog.show();
         });
     }
 
@@ -137,10 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.fragment_page:
-                showFragmentPage();
-                break;
+        if (item.getItemId() == R.id.fragment_page) {
+            showFragmentPage();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -150,26 +111,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置全屏
+     * Set full screen
      *
-     * @param activity
+     * @param activity current activity
      */
     public static void setFullScreen(AppCompatActivity activity) {
-//        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-
-        /**
-         * Issue Test
-         * Issue https://github.com/ChadCSong/ShineButton/issues/29
-         **/
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // in Activity's onCreate() for instance
-            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
-
 }

@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal">
+        android:baselineAligned="false" android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -93,14 +93,23 @@
 
     </LinearLayout>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/label_shine_button"
+        android:importantForAutofill="no"
+        android:inputType="text" />
+
     <Button
         android:id="@+id/btn_list_demo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginRight="20dp"
-        android:text="List Demo Activity" />
+        android:layout_marginEnd="20dp"
+        android:text="@string/btn_list_demo" />
 
     <Button
         android:id="@+id/btn_fragment_demo"
@@ -108,8 +117,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginRight="20dp"
-        android:text="Fragment Demo" />
+        android:layout_marginEnd="20dp"
+        android:text="@string/btn_fragment_demo" />
 
     <Button
         android:id="@+id/btn_dialog_demo"
@@ -117,18 +128,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginRight="20dp"
-        android:text="Dialog Demo"
-        android:visibility="gone" />
+        android:layout_marginEnd="20dp"
+        android:text="@string/btn_dialog_demo"
+        android:visibility="visible" />
 
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="@android:color/white"
         android:layout_marginTop="200dp"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="10dp"
         android:visibility="gone"
@@ -144,18 +157,18 @@
                 android:layout_width="375dp"
                 android:layout_height="160dp"
                 android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:orientation="vertical">
+                android:layout_height="51dp">
 
                 <TextView
                     android:id="@+id/title_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="pavel"
+                    android:text="@string/label_pavel"
                     android:layout_margin="8dp"
                     android:maxLines="3" />
 
@@ -167,16 +180,15 @@
                     app:btn_color="#FF6666"
                     app:btn_fill_color="#999933"
                     app:siShape="@raw/heart"
-                    android:layout_gravity="right"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
+                    
                     android:layout_alignParentEnd="true" />
 
                 <TextView
                     android:id="@+id/movie_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="robin"
+                    android:text="@string/label_robin"
                     android:layout_margin="8dp"
                     android:layout_alignParentBottom="true" />
 
@@ -192,5 +204,5 @@
 
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

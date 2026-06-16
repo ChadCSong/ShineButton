@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ShineButton</string>
+    <string name="btn_list_demo">List Demo Activity</string>
+    <string name="btn_fragment_demo">Fragment Demo</string>
+    <string name="btn_dialog_demo">Dialog Demo</string>
+    <string name="label_pavel">Pavel</string>
+    <string name="label_robin">Robin</string>
+    <string name="label_hide">HIDE</string>
+    <string name="label_shine_button">ShineButton</string>
 </resources>

@@ -39,3 +39,7 @@ captures/
 
 # Keystore files
 *.jks
+
+local.properties
+gradle-mvn-push.gradle
+

@@ -1,20 +1,35 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '26.0.2'
+    namespace "com.sackcentury.shinebuttonlib"
+    compileSdkVersion 34
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 23
-        versionCode 9
-        versionName "0.1.9"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 14
+        versionName "0.4.1"
 
     }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,10 +39,19 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.daasuu:EasingInterpolator:1.0.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.20"
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    // Compose dependencies
+    def composeBom = platform('androidx.compose:compose-bom:2023.01.00')
+    implementation composeBom
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.material:material'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.runtime:runtime'
+    implementation 'androidx.compose.animation:animation'
 }
 
-//apply from: '../maven_push.gradle'
+//apply from: '../gradle-mvn-push.gradle'
