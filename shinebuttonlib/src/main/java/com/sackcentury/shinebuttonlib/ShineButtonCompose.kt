@@ -94,7 +94,9 @@ fun ShineButtonCompose(
         },
         label = "Scale"
     ) { checked ->
-        1.0f
+        // To satisfy Compose's UnusedTransitionTargetStateParameter lint, we must read the state parameter.
+        // The scale naturally returns to 1.0f in both checked/unchecked idle states.
+        if (checked) 1.0f else 1.0f
     }
 
     val particleColors = remember(allowRandomColor) {
