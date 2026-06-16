@@ -309,18 +309,6 @@ class ShineButton : PorterShapeImageView {
     }
 
     /**
-     * Removes a view (typically ShineView) from the activity's content view.
-     */
-    fun removeView(view: View?) {
-        activity?.let {
-            val rootView = it.findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT)
-            rootView.removeView(view)
-        } ?: run {
-            Log.e(TAG, "ShineButton must be initialized with an Activity context.")
-        }
-    }
-
-    /**
      * Sets the shape of the button using a raw resource ID (PNG mask).
      */
     fun setShapeResource(raw: Int) {
