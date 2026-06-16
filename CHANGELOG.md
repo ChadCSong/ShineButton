@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1] - 2026-06-13
+
+### Fixed
+- Fixed CI build failures caused by missing Compose dependencies. Introduced Compose BOM (`compose-bom:2023.01.00`).
+- Replaced remote `EasingInterpolator` dependency with an internal `QuartOutInterpolator` to resolve JitPack 403 Forbidden errors.
+- Resolved `UnusedTransitionTargetStateParameter` Lint error in `ShineButtonCompose`.
+- Synced `app` module `minSdkVersion` to 21 to match the library requirements.
+
 ## [0.4.0] - 2026-06-13
 
 ### Added

@@ -38,7 +38,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation 'com.github.ChadCSong:ShineButton:v0.4.0'
+    implementation 'com.github.ChadCSong:ShineButton:v0.4.1'
 }
 ```
 
@@ -48,7 +48,7 @@ Add the dependency to your `app/build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation 'com.sackcentury:shinebutton:0.3.0'
+    implementation 'com.sackcentury:shinebutton:0.4.1'
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 <dependency>
   <groupId>com.sackcentury</groupId>
   <artifactId>shinebutton</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.1</version>
   <type>aar</type>
 </dependency>
 ```
