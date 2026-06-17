@@ -160,7 +160,7 @@ We are continuously working to improve ShineButton. Here is what we have planned
 
 - [x] **Kotlin Migration**: Fully convert the library to Kotlin for better safety and modern features.
 - [x] **Jetpack Compose**: Provide a native Composable version of ShineButton.
-- [ ] **Vector Support**: Allow using `VectorDrawable` as shape masks.
+- [x] **Vector Support**: Allow using `VectorDrawable` as shape masks.
 - [ ] **Custom Animators**: Support for custom easing and path-based animations.
 - [ ] **Material 3**: Update the demo app with Material 3 design and dynamic colors.
 - [ ] **Performance**: Further optimize canvas operations and memory allocation.

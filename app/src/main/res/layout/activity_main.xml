@@ -134,6 +134,25 @@
         android:text="@string/btn_dialog_demo"
         android:visibility="visible" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_vector_demo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+    <com.sackcentury.shinebuttonlib.ShineButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/vector_shine_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        app:btn_color="@android:color/darker_gray"
+        app:btn_fill_color="#4CAF50"
+        app:siShape="@drawable/ic_android_vector"
+        app:allow_random_color="true"
+        app:shine_count="15" />
+
 
     <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"

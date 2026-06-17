@@ -7,4 +7,5 @@
     <string name="label_robin">Robin</string>
     <string name="label_hide">HIDE</string>
     <string name="label_shine_button">ShineButton</string>
+    <string name="label_vector_demo">Vector Support Demo</string>
 </resources>

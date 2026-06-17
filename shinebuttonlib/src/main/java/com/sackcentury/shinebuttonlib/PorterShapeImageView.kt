@@ -40,36 +40,41 @@ open class PorterShapeImageView @JvmOverloads constructor(
 
     override fun paintMaskCanvas(maskCanvas: Canvas, maskPaint: Paint, width: Int, height: Int) {
         shape?.let {
-            if (it is BitmapDrawable) {
-                configureBitmapBounds(getWidth(), getHeight())
-                if (drawMatrix != null) {
-                    val drawableSaveCount = maskCanvas.save()
-                    maskCanvas.concat(matrix)
-                    it.draw(maskCanvas)
-                    maskCanvas.restoreToCount(drawableSaveCount)
-                    return
-                }
+            configureDrawableBounds(getWidth(), getHeight())
+            if (drawMatrix != null) {
+                val drawableSaveCount = maskCanvas.save()
+                maskCanvas.concat(matrix)
+                it.draw(maskCanvas)
+                maskCanvas.restoreToCount(drawableSaveCount)
+            } else {
+                it.draw(maskCanvas)
             }
-
-            it.setBounds(0, 0, getWidth(), getHeight())
-            it.draw(maskCanvas)
         }
     }
 
-    private fun configureBitmapBounds(viewWidth: Int, viewHeight: Int) {
+    private fun configureDrawableBounds(viewWidth: Int, viewHeight: Int) {
         drawMatrix = null
         val s = shape ?: return
         val drawableWidth = s.intrinsicWidth
         val drawableHeight = s.intrinsicHeight
-        val fits = viewWidth == drawableWidth && viewHeight == drawableHeight
 
-        if (drawableWidth > 0 && drawableHeight > 0 && !fits) {
+        if (drawableWidth <= 0 || drawableHeight <= 0) {
+            // For drawables without intrinsic size (like some vectors or solid colors), 
+            // just fit to view bounds
+            s.setBounds(0, 0, viewWidth, viewHeight)
+            return
+        }
+
+        val fits = viewWidth == drawableWidth && viewHeight == drawableHeight
+        if (!fits) {
             s.setBounds(0, 0, drawableWidth, drawableHeight)
             val widthRatio = viewWidth.toFloat() / drawableWidth.toFloat()
             val heightRatio = viewHeight.toFloat() / drawableHeight.toFloat()
-            val scale = Math.min(widthRatio, heightRatio)
-            val dx = ((viewWidth - drawableWidth * scale) * 0.5f + 0.5f).toInt().toFloat()
-            val dy = ((viewHeight - drawableHeight * scale) * 0.5f + 0.5f).toInt().toFloat()
+            
+            // Use Center Crop logic: take the larger scale and center it
+            val scale = Math.max(widthRatio, heightRatio)
+            val dx = ((viewWidth - drawableWidth * scale) * 0.5f + 0.5f)
+            val dy = ((viewHeight - drawableHeight * scale) * 0.5f + 0.5f)
 
             matrix.setScale(scale, scale)
             matrix.postTranslate(dx, dy)

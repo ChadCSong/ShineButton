@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2026-06-13
+
+### Added
+- **Vector Support**: Fully supported `VectorDrawable` as button shapes in the classic View version.
+- Optimized `PorterShapeImageView` rendering logic to handle all `Drawable` types with high-quality scaling.
+- Added a Vector Support demo to the main activity.
+
+### Changed
+- Improved `ShineButtonCompose` rendering precision.
+- Bumped version to 0.5.0.
+
 ## [0.4.1] - 2026-06-13
 
 ### Fixed

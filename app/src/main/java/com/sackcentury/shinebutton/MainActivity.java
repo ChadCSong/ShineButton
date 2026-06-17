@@ -46,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (shineButton != null)
             shineButton.init(this);
+
+        ShineButton vectorButton = findViewById(R.id.vector_shine_button);
+        if (vectorButton != null) {
+            vectorButton.init(this);
+        }
+
         porterShapeImageView1 = findViewById(R.id.po_image1);
         if (porterShapeImageView1 != null)
             porterShapeImageView1.init(this);
