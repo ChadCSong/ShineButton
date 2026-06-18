@@ -2,10 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0] - 2026-06-13
+## [2.0.0] - 2026-06-13
 
 ### Added
-- **Final Release**: Reached milestone version 1.0.0 with all roadmap items completed.
+- **Major Milestone Release**: Reached version 2.0.0 with all roadmap items completed.
 
 ### Changed
 - **Performance Optimization**: Eliminated runtime object allocations in `onDraw()` across `ShineView` and `PorterImageView`. 
