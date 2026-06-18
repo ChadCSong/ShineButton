@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2026-06-13
+
+### Added
+- **Final Release**: Reached milestone version 1.0.0 with all roadmap items completed.
+
+### Changed
+- **Performance Optimization**: Eliminated runtime object allocations in `onDraw()` across `ShineView` and `PorterImageView`. 
+- Removed redundant `canvas.saveLayer()` calls, relying solely on highly efficient `Bitmap` drawing, boosting animation frames per second (FPS).
+- Completed and checked all items in the project Roadmap.
+
 ## [Unreleased]
 
 ### Added

@@ -206,8 +206,10 @@ class ShineView : View {
             if (allowRandomColor) {
                 val index = Math.abs(COLOR_COUNT / 2 - i).let { if (it >= COLOR_COUNT) COLOR_COUNT - 1 else it }
                 paint.color = colorRandom[index]
+            } else if (enableFlashing) {
+                paint.color = colorRandom[random.nextInt(COLOR_COUNT - 1)]
             }
-            canvas.drawArc(rectF, 360f / shineCount * i + 1 + (value - 1) * turnAngle, 0.1f, false, getConfigPaint(paint))
+            canvas.drawArc(rectF, 360f / shineCount * i + 1 + (value - 1) * turnAngle, 0.1f, false, paint)
         }
 
         // Draw secondary (small) shine particles
@@ -215,8 +217,10 @@ class ShineView : View {
             if (allowRandomColor) {
                 val index = Math.abs(COLOR_COUNT / 2 - i).let { if (it >= COLOR_COUNT) COLOR_COUNT - 1 else it }
                 paintSmall.color = colorRandom[index]
+            } else if (enableFlashing) {
+                paintSmall.color = colorRandom[random.nextInt(COLOR_COUNT - 1)]
             }
-            canvas.drawArc(rectFSmall, 360f / shineCount * i + 1 - smallOffsetAngle + (value - 1) * turnAngle, 0.1f, false, getConfigPaint(paintSmall))
+            canvas.drawArc(rectFSmall, 360f / shineCount * i + 1 - smallOffsetAngle + (value - 1) * turnAngle, 0.1f, false, paintSmall)
         }
 
         // Draw click splash point
@@ -234,13 +238,6 @@ class ShineView : View {
             isRun = true
             shineButton?.let { showAnimation(it) }
         }
-    }
-
-    private fun getConfigPaint(paint: Paint): Paint {
-        if (enableFlashing) {
-            paint.color = colorRandom[random.nextInt(COLOR_COUNT - 1)]
-        }
-        return paint
     }
 
     /**

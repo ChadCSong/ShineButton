@@ -98,12 +98,6 @@ abstract class PorterImageView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         if (!isInEditMode) {
-            val saveCount: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                canvas.saveLayer(0.0f, 0.0f, width.toFloat(), height.toFloat(), null)
-            } else {
-                @Suppress("DEPRECATION")
-                canvas.saveLayer(0.0f, 0.0f, width.toFloat(), height.toFloat(), null, Canvas.ALL_SAVE_FLAG)
-            }
             try {
                 if (invalidated) {
                     val drawable = drawable
@@ -142,8 +136,6 @@ abstract class PorterImageView @JvmOverloads constructor(
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Exception occurred while drawing $id", e)
-            } finally {
-                canvas.restoreToCount(saveCount)
             }
         } else {
             super.onDraw(canvas)

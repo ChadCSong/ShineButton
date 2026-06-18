@@ -163,7 +163,7 @@ We are continuously working to improve ShineButton. Here is what we have planned
 - [x] **Vector Support**: Allow using `VectorDrawable` as shape masks.
 - [x] **Custom Animators**: Support for custom easing and path-based animations.
 - [x] **Material 3**: Update the demo app with Material 3 design and dynamic colors.
-- [ ] **Performance**: Further optimize canvas operations and memory allocation.
+- [x] **Performance**: Further optimize canvas operations and memory allocation.
 
 ## Requirements
 
