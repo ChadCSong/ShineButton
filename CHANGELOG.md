@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Upgraded the Demo app to use Material 3 design (`Theme.Material3.DayNight`).
+- Enabled dynamic colors (`DynamicColors`) support in the Demo app.
+
 ## [0.6.0] - 2026-06-13
 
 ### Added
