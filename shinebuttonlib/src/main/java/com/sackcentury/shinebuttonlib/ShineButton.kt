@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.animation.Interpolator
 import android.view.animation.LinearInterpolator
 import androidx.core.content.res.ResourcesCompat
 import com.sackcentury.shinebuttonlib.listener.SimpleAnimatorListener
@@ -248,6 +249,10 @@ class ShineButton : PorterShapeImageView {
 
     fun setShineSize(size: Int) {
         shineParams.shineSize = size
+    }
+
+    fun setInterpolator(interpolator: Interpolator) {
+        shineParams.customInterpolator = interpolator
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

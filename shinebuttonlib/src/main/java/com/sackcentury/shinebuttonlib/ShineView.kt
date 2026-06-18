@@ -10,6 +10,7 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Interpolator
 import com.sackcentury.shinebuttonlib.interpolator.QuartOutInterpolator
 import com.sackcentury.shinebuttonlib.listener.SimpleAnimatorListener
 import java.util.*
@@ -68,6 +69,7 @@ class ShineView : View {
     private var shineSize = 0
     private var allowRandomColor = false
     private var enableFlashing = false
+    private var customInterpolator: Interpolator? = null
 
     private val rectF = RectF()
     private val rectFSmall = RectF()
@@ -95,6 +97,7 @@ class ShineView : View {
     constructor(context: Context, shineButton: ShineButton, shineParams: ShineParams) : super(context) {
         initShineParams(shineParams, shineButton)
         this.shineAnimator = ShineAnimator(animDuration, shineDistanceMultiple, clickAnimDuration)
+        this.shineAnimator?.interpolator = customInterpolator ?: QuartOutInterpolator()
         this.shineButton = shineButton
 
         // Main shine particles paint
@@ -123,7 +126,7 @@ class ShineView : View {
         // Click splash animation (expanding circle)
         clickAnimator = ValueAnimator.ofFloat(0f, 1.1f).apply {
             duration = clickAnimDuration
-            interpolator = QuartOutInterpolator()
+            interpolator = customInterpolator ?: QuartOutInterpolator()
             addUpdateListener { valueAnimator ->
                 clickValue = valueAnimator.animatedValue as Float
                 invalidate()
@@ -255,6 +258,7 @@ class ShineView : View {
         var smallShineOffsetAngle = 20f
         var smallShineColor = 0
         var shineSize = 0
+        var customInterpolator: Interpolator? = null
     }
 
     /**
@@ -272,6 +276,7 @@ class ShineView : View {
         smallShineColor = shineParams.smallShineColor
         bigShineColor = shineParams.bigShineColor
         shineSize = shineParams.shineSize
+        customInterpolator = shineParams.customInterpolator
 
         if (smallShineColor == 0) {
             smallShineColor = colorRandom[6]

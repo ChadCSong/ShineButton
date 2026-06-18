@@ -10,41 +10,30 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.PaintingStyle
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.drawscope.translate
-
 /**
  * A native Jetpack Compose implementation of the ShineButton.
  *
  * @param isChecked The current checked state.
  * @param onCheckedChange Callback when the state changes.
- * @param modifier Modifier for the button.
  * @param shape The Vector image to use for the button icon (e.g., Icons.Default.Favorite).
+ * @param modifier Modifier for the button.
  * @param btnColor Base color of the button (unchecked).
  * @param btnFillColor Color when the button is checked.
  * @param shineColor Primary color for shine particles.
  * @param shineSize Size of the button.
  * @param shineCount Number of shine particles.
+ * @param shineAnimationSpec Custom finite animation spec for the shine particle effect.
+ * @param scaleAnimationSpec Custom finite animation spec for the icon scale effect.
  */
 @Composable
 fun ShineButtonCompose(
@@ -58,7 +47,9 @@ fun ShineButtonCompose(
     shineSize: Dp = 50.dp,
     shineCount: Int = 8,
     animDuration: Int = 1000,
-    allowRandomColor: Boolean = false
+    allowRandomColor: Boolean = false,
+    shineAnimationSpec: FiniteAnimationSpec<Float>? = null,
+    scaleAnimationSpec: FiniteAnimationSpec<Float>? = null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val painter = rememberVectorPainter(image = shape)
@@ -69,7 +60,7 @@ fun ShineButtonCompose(
     val shineProgress by transition.animateFloat(
         transitionSpec = {
             if (targetState) {
-                tween(durationMillis = animDuration, easing = LinearOutSlowInEasing)
+                shineAnimationSpec ?: tween(durationMillis = animDuration, easing = LinearOutSlowInEasing)
             } else {
                 tween(durationMillis = 0)
             }
@@ -82,7 +73,7 @@ fun ShineButtonCompose(
     val scale by transition.animateFloat(
         transitionSpec = {
             if (targetState) {
-                keyframes {
+                scaleAnimationSpec ?: keyframes {
                     durationMillis = 500
                     0.4f at 0
                     1.1f at 250
@@ -95,7 +86,6 @@ fun ShineButtonCompose(
         label = "Scale"
     ) { checked ->
         // To satisfy Compose's UnusedTransitionTargetStateParameter lint, we must read the state parameter.
-        // The scale naturally returns to 1.0f in both checked/unchecked idle states.
         if (checked) 1.0f else 1.0f
     }
 

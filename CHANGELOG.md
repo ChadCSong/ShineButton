@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2026-06-13
+
+### Added
+- **Custom Animators Support**: Introduced ability to set custom `Interpolator` in View version and `AnimationSpec` in Compose version.
+- Added `setInterpolator(Interpolator)` method to `ShineButton`.
+- Exposed `shineAnimationSpec` and `scaleAnimationSpec` in `ShineButtonCompose`.
+
+### Changed
+- Bumped version to 0.6.0.
+
 ## [0.5.0] - 2026-06-13
 
 ### Added
