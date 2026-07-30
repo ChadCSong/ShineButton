@@ -1,19 +1,31 @@
 package com.sackcentury.shinebuttonlib
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlin.math.PI
@@ -21,19 +33,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 /**
- * A native Jetpack Compose implementation of the ShineButton.
- *
- * @param isChecked The current checked state.
- * @param onCheckedChange Callback when the state changes.
- * @param shape The Vector image to use for the button icon (e.g., Icons.Default.Favorite).
- * @param modifier Modifier for the button.
- * @param btnColor Base color of the button (unchecked).
- * @param btnFillColor Color when the button is checked.
- * @param shineColor Primary color for shine particles.
- * @param shineSize Size of the button.
- * @param shineCount Number of shine particles.
- * @param shineAnimationSpec Custom finite animation spec for the shine particle effect.
- * @param scaleAnimationSpec Custom finite animation spec for the icon scale effect.
+ * A native Jetpack Compose implementation of the ShineButton accepting an [ImageVector].
  */
 @Composable
 fun ShineButtonCompose(
@@ -41,6 +41,85 @@ fun ShineButtonCompose(
     onCheckedChange: (Boolean) -> Unit,
     shape: ImageVector,
     modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+    btnColor: Color = Color.Gray,
+    btnFillColor: Color = Color.Red,
+    shineColor: Color = Color.Red,
+    shineSize: Dp = 50.dp,
+    shineCount: Int = 8,
+    animDuration: Int = 1000,
+    allowRandomColor: Boolean = false,
+    shineAnimationSpec: FiniteAnimationSpec<Float>? = null,
+    scaleAnimationSpec: FiniteAnimationSpec<Float>? = null
+) {
+    val painter = rememberVectorPainter(image = shape)
+    ShineButtonCompose(
+        isChecked = isChecked,
+        onCheckedChange = onCheckedChange,
+        painter = painter,
+        modifier = modifier,
+        contentDescription = contentDescription,
+        btnColor = btnColor,
+        btnFillColor = btnFillColor,
+        shineColor = shineColor,
+        shineSize = shineSize,
+        shineCount = shineCount,
+        animDuration = animDuration,
+        allowRandomColor = allowRandomColor,
+        shineAnimationSpec = shineAnimationSpec,
+        scaleAnimationSpec = scaleAnimationSpec
+    )
+}
+
+/**
+ * A native Jetpack Compose implementation of the ShineButton accepting a Drawable resource ID.
+ */
+@Composable
+fun ShineButtonCompose(
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    @DrawableRes shapeRes: Int,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+    btnColor: Color = Color.Gray,
+    btnFillColor: Color = Color.Red,
+    shineColor: Color = Color.Red,
+    shineSize: Dp = 50.dp,
+    shineCount: Int = 8,
+    animDuration: Int = 1000,
+    allowRandomColor: Boolean = false,
+    shineAnimationSpec: FiniteAnimationSpec<Float>? = null,
+    scaleAnimationSpec: FiniteAnimationSpec<Float>? = null
+) {
+    val painter = painterResource(id = shapeRes)
+    ShineButtonCompose(
+        isChecked = isChecked,
+        onCheckedChange = onCheckedChange,
+        painter = painter,
+        modifier = modifier,
+        contentDescription = contentDescription,
+        btnColor = btnColor,
+        btnFillColor = btnFillColor,
+        shineColor = shineColor,
+        shineSize = shineSize,
+        shineCount = shineCount,
+        animDuration = animDuration,
+        allowRandomColor = allowRandomColor,
+        shineAnimationSpec = shineAnimationSpec,
+        scaleAnimationSpec = scaleAnimationSpec
+    )
+}
+
+/**
+ * A native Jetpack Compose implementation of the ShineButton accepting a generic [Painter].
+ */
+@Composable
+fun ShineButtonCompose(
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    painter: Painter,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
     btnColor: Color = Color.Gray,
     btnFillColor: Color = Color.Red,
     shineColor: Color = Color.Red,
@@ -52,7 +131,10 @@ fun ShineButtonCompose(
     scaleAnimationSpec: FiniteAnimationSpec<Float>? = null
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val painter = rememberVectorPainter(image = shape)
+
+    // Accessibility descriptions
+    val defaultDescription = contentDescription ?: "Shine button"
+    val defaultStateDescription = if (isChecked) "Checked" else "Unchecked"
 
     // Animation states
     val transition = updateTransition(targetState = isChecked, label = "ShineTransition")
@@ -85,7 +167,6 @@ fun ShineButtonCompose(
         },
         label = "Scale"
     ) { checked ->
-        // To satisfy Compose's UnusedTransitionTargetStateParameter lint, we must read the state parameter.
         if (checked) 1.0f else 1.0f
     }
 
@@ -104,6 +185,11 @@ fun ShineButtonCompose(
     Box(
         modifier = modifier
             .size(shineSize)
+            .semantics {
+                role = Role.Checkbox
+                this.contentDescription = defaultDescription
+                this.stateDescription = defaultStateDescription
+            }
             .clickable(
                 interactionSource = interactionSource,
                 indication = null
@@ -127,7 +213,7 @@ fun ShineButtonCompose(
                     val y = center.y + sin(angleRad) * currentRadius
 
                     val color = if (allowRandomColor) particleColors[i % particleColors.size] else shineColor
-                    
+
                     // Main particle
                     drawCircle(
                         color = color,
@@ -139,7 +225,7 @@ fun ShineButtonCompose(
                     val offsetAngleRad = (angle + 20f) * (PI / 180f).toFloat()
                     val x2 = center.x + cos(offsetAngleRad) * (currentRadius * 0.85f)
                     val y2 = center.y + sin(offsetAngleRad) * (currentRadius * 0.85f)
-                    
+
                     drawCircle(
                         color = color.copy(alpha = 0.6f),
                         radius = 1.5.dp.toPx() * (1f - shineProgress),
@@ -163,10 +249,38 @@ fun ShineButtonCompose(
                 with(painter) {
                     draw(
                         size = size,
-                        colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(iconColor)
+                        colorFilter = ColorFilter.tint(iconColor)
                     )
                 }
             }
         }
     }
+}
+
+// --- IDE Previews ---
+
+@Preview(name = "Unchecked State", showBackground = true)
+@Composable
+private fun ShineButtonComposeUncheckedPreview() {
+    var checked by remember { mutableStateOf(false) }
+    ShineButtonCompose(
+        isChecked = checked,
+        onCheckedChange = { checked = it },
+        shape = Icons.Default.Favorite,
+        btnColor = Color.Gray,
+        btnFillColor = Color.Red
+    )
+}
+
+@Preview(name = "Checked State", showBackground = true)
+@Composable
+private fun ShineButtonComposeCheckedPreview() {
+    var checked by remember { mutableStateOf(true) }
+    ShineButtonCompose(
+        isChecked = checked,
+        onCheckedChange = { checked = it },
+        shape = Icons.Default.Favorite,
+        btnColor = Color.Gray,
+        btnFillColor = Color.Red
+    )
 }

@@ -299,15 +299,15 @@ class ShineButton : PorterShapeImageView {
                 rootView = dialog.window!!.decorView as ViewGroup
                 val innerView = rootView.findViewById<View>(android.R.id.content)
                 if (innerView != null) {
-                    rootView.addView(shineView, ViewGroup.LayoutParams(innerView.width, innerView.getHeight()))
+                    rootView.addView(shineView, ViewGroup.LayoutParams(innerView.width, innerView.height))
                 } else {
-                    rootView.addView(shineView, ViewGroup.LayoutParams(rootView.width, rootView.getHeight()))
+                    rootView.addView(shineView, ViewGroup.LayoutParams(rootView.width, rootView.height))
                 }
             } else {
                 rootView = act.window.decorView as ViewGroup
-                rootView.addView(shineView, ViewGroup.LayoutParams(rootView.width, rootView.getHeight()))
+                rootView.addView(shineView, ViewGroup.LayoutParams(rootView.width, rootView.height))
             }
-            doShareAnim()
+            doShakeAnim()
         } ?: run {
             Log.e(TAG, "ShineButton must be initialized with an Activity context to show animation.")
         }
@@ -323,7 +323,7 @@ class ShineButton : PorterShapeImageView {
     /**
      * Executes the button's scale/shake animation.
      */
-    private fun doShareAnim() {
+    private fun doShakeAnim() {
         shakeAnimator = ValueAnimator.ofFloat(0.4f, 1f, 0.9f, 1f).apply {
             interpolator = LinearInterpolator()
             duration = 500
@@ -351,16 +351,36 @@ class ShineButton : PorterShapeImageView {
         invalidate()
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        shakeAnimator?.apply {
+            end()
+            cancel()
+        }
+        shineView?.let { view ->
+            (view.parent as? ViewGroup)?.removeView(view)
+            shineView = null
+        }
+    }
+
     /**
      * Calculates position and visibility metrics to assist with positioning the shine animation.
      */
     private fun calPixels() {
-        activity?.let {
-            it.windowManager.defaultDisplay.getMetrics(metrics)
+        activity?.let { act ->
+            val windowManager = act.windowManager
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                val bounds = windowManager.currentWindowMetrics.bounds
+                metrics.widthPixels = bounds.width()
+                metrics.heightPixels = bounds.height()
+            } else {
+                @Suppress("DEPRECATION")
+                windowManager.defaultDisplay.getMetrics(metrics)
+            }
             val location = IntArray(2)
             getLocationInWindow(location)
             val visibleFrame = Rect()
-            it.window.decorView.getWindowVisibleDisplayFrame(visibleFrame)
+            act.window.decorView.getWindowVisibleDisplayFrame(visibleFrame)
             realBottomHeight = visibleFrame.height() - location[1]
             bottomHeight = metrics.heightPixels - location[1]
         }

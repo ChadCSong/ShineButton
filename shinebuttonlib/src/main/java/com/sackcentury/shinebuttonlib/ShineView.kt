@@ -240,6 +240,12 @@ class ShineView : View {
         }
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        shineAnimator?.cancel()
+        clickAnimator?.cancel()
+    }
+
     /**
      * Container for shine animation parameters.
      */
